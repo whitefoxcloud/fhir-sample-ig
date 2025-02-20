@@ -3,9 +3,6 @@ name: Build and Deploy FHIR Sample IG to AWS S3
 on:
   push:
     branches:
-      - master 
-  pull_request:
-    branches:
       - master
 
 jobs:
