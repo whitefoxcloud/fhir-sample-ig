@@ -39,8 +39,8 @@ jobs:
 
       - name: Build the FHIR Implementation Guide
         run: |
-          java -jar publisher.jar -gui -ig "./"
-          ls -la || echo "No output folder generated!"
+          java -jar publisher.jar -ig "./"
+          ls -la
 
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v2
