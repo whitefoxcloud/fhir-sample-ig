@@ -11,7 +11,10 @@
     <link href="{{site.data.info.assets}}fhir.css" rel="stylesheet"/>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{site.data.info.assets}}assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="{{site.data.info.assets}}assets/css/bootstrap-fhir.css" rel="stylesheet"/> -->
+    <link href="{{site.data.info.assets}}assets/css/untitled-ui.css" rel="stylesheet"/>
+
 
     <!-- Project extras -->
     <link href="{{site.data.info.assets}}assets/css/project.css" rel="stylesheet"/>
@@ -58,28 +61,74 @@
 	  <script src="{{site.data.info.assets}}assets/js/prism.js"></script>
     <script type="text/javascript" src="{{site.data.info.assets}}assets/js/mermaid.js"></script>
     <script type="text/javascript" src="{{site.data.info.assets}}assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style type="text/css">h2{--heading-prefix:"{{site.data.info.headingOffset}}{{label}}"}
-    h3,h4,h5,h6{--heading-prefix:"{{site.data.info.headingOffset}}{{site.data.pages[page.path].label}}"}</style>
-        <header style="width: 100%; margin-top:20px; display: flex; justify-content: space-between; height: 50px; align-items: center;">
-        <div style="display: flex; justify-items: center; min-width: 25%; align-items: center;">
-          <select onchange="window.location.href=this.value" style="width: 70px; height: 30px; margin: 0 10px; border-radius: 5px;">
-            <option value="v1.0.0" {% if site.data.pages[page.path].version == 'v1.0.0' %}selected{% endif %}>v1.0.0</option>
-            <option value="v2.0.0" {% if site.data.pages[page.path].version == 'v2.0.0' %}selected{% endif %}>v1.1.0</option>
-            <option value="v2.0.0" {% if site.data.pages[page.path].version == 'v2.0.0' %}selected{% endif %}>v1.2.0</option>
-            <option value="v2.0.0" {% if site.data.pages[page.path].version == 'v2.0.0' %}selected{% endif %}>v1.3.0</option>
-            <option value="v2.0.0" {% if site.data.pages[page.path].version == 'v2.0.0' %}selected{% endif %}>v1.3.1</option>
+    h3,h4,h5,h6{--heading-prefix:"{{site.data.info.headingOffset}}{{site.data.pages[page.path].label}}"}
+    </style>
+        <header class="d-flex justify-content-between align-items-center" style="height: 50px; border: 1px solid #E7EBF1; padding: 36px 48px;">
+          <div class="gap-2" style="display: flex; justify-items: center; min-width: 25%; align-items: center;">
+            <div class="dropdown">
+              <button class="btn btn-secondary" type="button" style="background-color: white; color: black; border-radius: 4px; border-color: #DBE1EA;" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% if site.data.pages[page.path].version %}{% if site.data.pages[page.path].version contains 'v' %}{{ site.data.pages[page.path].version | replace: 'v', 'v ' }}{% else %}v {{ site.data.pages[page.path].version }}{% endif %}{% else %}Select Version{% endif %}
+                <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.5 0.75L6 5.25L10.5 0.75" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="flex-direction: column !important;">
+                  <a class="dropdown-item" href="v1.0.0" {% raw %}{% if site.data.pages[page.path].version == 'v1.0.0' %}{% endraw %}style="font-weight: bold;"{% raw %}{% endif %}{% endraw %}>v1.0.0</a>
+                  <a class="dropdown-item" href="v1.1.0" {% raw %}{% if site.data.pages[page.path].version == 'v1.1.0' %}{% endraw %}style="font-weight: bold;"{% raw %}{% endif %}{% endraw %}>v1.1.0</a>
+                  <a class="dropdown-item" href="v1.2.0" {% raw %}{% if site.data.pages[page.path].version == 'v1.2.0' %}{% endraw %}style="font-weight: bold;"{% raw %}{% endif %}{% endraw %}>v1.2.0</a>
+                  <a class="dropdown-item" href="v1.3.0" {% raw %}{% if site.data.pages[page.path].version == 'v1.3.0' %}{% endraw %}style="font-weight: bold;"{% raw %}{% endif %}{% endraw %}>v1.3.0</a>
+                  <a class="dropdown-item" href="v1.3.1" {% raw %}{% if site.data.pages[page.path].version == 'v1.3.1' %}{% endraw %}style="font-weight: bold; color: red;"{% raw %}{% endif %}{% endraw %}>v1.3.1 (Latest)</a>
+              </div>
+            </div>
+            <div class="gap-1 d-flex flex-row align-items-center" style="color: #E83A3A; font-size: 12px; font-weight: 500;">
+              <div>
+                Latest stable version 1.3.1
+              </div>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.16675 5.83333C1.16675 5.83333 2.33632 4.23979 3.28649 3.28898C4.23665 2.33816 5.54968 1.75 7.00008 1.75C9.89958 1.75 12.2501 4.10051 12.2501 7C12.2501 9.8995 9.89958 12.25 7.00008 12.25C4.60661 12.25 2.58723 10.6483 1.95528 8.45833M1.16675 5.83333V2.33333M1.16675 5.83333H4.66675" stroke="#E83A3A" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
 
-
-          </select>
-          <div style="color: red; font-size: 12px;">Latest stable version 1.3.1</div>
-        </div>
-        <div style="width: 30%;">
+      <div class="d-flex flex-row align-items-center gap-4"> 
           <div style="position: relative; display: inline-block;">
-        <input type="text" placeholder="Search..." style=" height: 30px; border-radius: 5px; border: 1px solid #ccc; margin: 0 10px;">
-        <!-- <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
-          <img src="{{site.data.info.assets}}assets/images/search-icon.png" alt="Search" style="width: 16px; height: 16px;">
-        </span> -->
-        </div>
+            <input type="text" placeholder="Search" class="ui-input" style="padding-left: 30px;">
+            <span class="d-flex justify-content-center position-absolute" style="left: 20px; top: 50%; transform: translateY(-50%); pointer-events: none;">              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 13L10.6667 10.6667M12.3333 6.66667C12.3333 9.79628 9.79628 12.3333 6.66667 12.3333C3.53705 12.3333 1 9.79628 1 6.66667C1 3.53705 3.53705 1 6.66667 1C9.79628 1 12.3333 3.53705 12.3333 6.66667Z" stroke="#889AB9" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+          </div>
+
+          <div class="d-flex flex-row align-items-center gap-1">
+            <div class="ui-text-md">
+              Contribute
+            </div>
+            <div>
+              <svg width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4.20898C6.762 4.20898 2.5 8.47098 2.5 13.709C2.5 17.835 5.24 21.563 9.164 22.776C9.324 22.828 9.498 22.792 9.627 22.686C9.757 22.58 9.825 22.416 9.809 22.249C9.669 20.856 10.47 19.38 10.812 19.026C10.944 18.891 10.988 18.692 10.925 18.514C10.862 18.335 10.704 18.206 10.516 18.183C8.725 17.955 7.067 17.347 7.067 14.457C7.063 13.738 7.337 13.051 7.836 12.522C7.968 12.383 8.009 12.181 7.941 12.002C7.75 11.497 7.729 10.932 7.877 10.41C8.168 10.458 8.731 10.629 9.608 11.215C9.728 11.296 9.877 11.317 10.015 11.282C11.312 10.934 12.682 10.934 13.979 11.282C14.116 11.317 14.266 11.296 14.386 11.215C15.27 10.624 15.835 10.455 16.115 10.406C16.264 10.93 16.245 11.496 16.054 12.003C15.986 12.183 16.027 12.385 16.16 12.523C16.654 13.043 16.927 13.727 16.927 14.448C16.927 17.387 15.273 17.974 13.486 18.171C13.296 18.191 13.135 18.319 13.071 18.498C13.006 18.678 13.049 18.879 13.182 19.016C13.512 19.357 14.321 20.872 14.185 22.26C14.168 22.427 14.236 22.591 14.367 22.696C14.457 22.771 14.569 22.809 14.682 22.809C14.732 22.809 14.783 22.801 14.832 22.785C18.82 21.53 21.5 17.883 21.5 13.709C21.5 8.47098 17.238 4.20898 12 4.20898Z" fill="#6F7E97"/>
+                </svg>
+                
+            </div>
+          </div>
+
+          <div>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="8" fill="url(#paint0_linear_4234_522)"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.63886 16.0002C12.4771 14.7488 14.7489 12.4771 16.0001 9.63886C17.2514 12.4771 19.5232 14.7488 22.3614 16.0002C19.5232 17.2515 17.2514 19.5231 16.0002 22.3615C14.7489 19.5231 12.4771 17.2515 9.63886 16.0002ZM16.6631 7.38477H15.3371C14.331 11.2852 11.2852 14.331 7.38477 15.3372V16.6631C11.2852 17.6692 14.331 20.7151 15.3371 24.6155H16.6631C17.6693 20.7151 20.7151 17.6692 24.6155 16.6631V15.3372C20.7151 14.331 17.6693 11.2852 16.6631 7.38477ZM19.8822 9.15137V10.5207C20.1612 10.5207 20.5679 10.7001 20.932 11.0619C21.2954 11.4231 21.4782 11.8289 21.4782 12.1168H22.8476C22.8476 11.8202 23.0241 11.4129 23.3722 11.0589C23.719 10.7065 24.1237 10.5207 24.4437 10.5207V9.15137C24.1501 9.15137 23.7444 8.96792 23.3858 8.60636C23.0264 8.24401 22.8476 7.83714 22.8476 7.55529H21.4782C21.4782 7.83897 21.3003 8.24604 20.9433 8.60709C20.5873 8.96708 20.1818 9.15137 19.8822 9.15137ZM22.396 10.0987C22.3116 10.1844 22.2303 10.2759 22.1531 10.3723C22.0714 10.2725 21.9854 10.1783 21.8972 10.0906C21.8103 10.0042 21.7171 9.92018 21.6186 9.84025C21.7246 9.7543 21.8244 9.66351 21.917 9.56991C22.0026 9.48332 22.0856 9.39068 22.1646 9.29285C22.244 9.39101 22.3275 9.4839 22.4136 9.57064C22.5013 9.6591 22.5955 9.74512 22.6954 9.82692C22.589 9.91302 22.4889 10.0043 22.396 10.0987Z" fill="url(#paint1_linear_4234_522)"/>
+              <defs>
+              <linearGradient id="paint0_linear_4234_522" x1="4.30769" y1="2.46154" x2="33.8462" y2="37.5385" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FEE8FF"/>
+              <stop offset="1" stop-color="#EAF3FF"/>
+              </linearGradient>
+              <linearGradient id="paint1_linear_4234_522" x1="12.6865" y1="10.0357" x2="21.3019" y2="23.9528" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#EA54F2"/>
+              <stop offset="1" stop-color="#596FDF"/>
+              </linearGradient>
+              </defs>
+              </svg>              
+      </div>
 
 
 
