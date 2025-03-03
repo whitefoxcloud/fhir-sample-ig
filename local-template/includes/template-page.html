@@ -19,5 +19,6 @@ h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefi
   </div>
   {% assign path = page.path | split: '.html' %}
   {% include {{path}}.xml %}
+
 </div>
 {% include fragment-pageend.html %}
