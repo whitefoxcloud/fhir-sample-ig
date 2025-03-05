@@ -207,3 +207,31 @@ body {
   background-color: var(--ui-gray-50);
 }
 
+.nav-tabs .nav-link {
+  color: #495057;
+  font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #fdeae5;
+  color: #b91c1c;
+  border-color: #fdeae5;
+}
+
+.footer-link:hover {
+  color: #3C4554 !important;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer button.d-flex {
+  background-color: transparent !important;
+  transition: background-color 0.2s ease;
+  border: 1px solid #D0D5DD;
+}
+
+footer button.d-flex:hover {
+  background-color: white !important;
+  border: none;
+}
+
