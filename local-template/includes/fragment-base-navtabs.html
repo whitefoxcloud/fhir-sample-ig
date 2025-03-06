@@ -27,26 +27,6 @@
     </li>
     {% endif %}
 
-    {% if include.active == 'descriptions' %}
-    <li class="active-tab">
-      <a href="#">Detailed Descriptions</a>
-    </li>
-    {% else %}
-    <li>
-      <a href="{{include.type}}-{{include.id}}-descriptions.html">Detailed Descriptions</a>
-    </li>
-    {% endif %}
-
-    {% if include.active == 'examples' %}
-    <li class="active-tab">
-      <a href="#">Examples</a>
-    </li>
-    {% else %}
-    <li>
-      <a href="{{include.type}}-{{include.id}}-examples.html">Examples</a>
-    </li>
-    {% endif %}
-
     {% if site.data.resources[resource_].['testplan'] or site.data.resources[resource_].['testscript'] %}
       {% if include.active == 'testing' %}
       <li class="active-tab">
