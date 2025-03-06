@@ -235,3 +235,65 @@ footer button.d-flex:hover {
   border: none;
 }
 
+.nav-tabs li {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  border: 1px solid #FFE5DE;
+}
+
+.nav-tabs li:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.nav-tabs li:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.nav-tabs li:not(:first-child):not(:last-child) {
+  border-width: 0.5px;
+}
+
+.nav-tabs li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inter;
+}
+
+.nav-tabs li.active-tab {
+  background-color: #FFE5DE;
+}
+
+.nav-tabs li.active-tab a {
+  color: #B71616;
+}
+
+.nav-tabs li:first-child.active-tab {
+  border-radius: 8px 0 0 8px;
+}
+
+.nav-tabs li:last-child.active-tab {
+  border-radius: 0 8px 8px 0;
+}
+
+.nav-tabs li:hover {
+  background-color: #FFE5DE;
+  transition: background-color 0.2s ease;
+}
+
+.nav-tabs li:hover a {
+  color: #B71616;
+}
+
+.nav-tabs li.active-tab:hover {
+  background-color: #FFE5DE;
+}
+
