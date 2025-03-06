@@ -269,6 +269,7 @@ footer button.d-flex:hover {
   font-size: 14px;
   font-weight: 600;
   font-family: inter;
+  color: #344054;
 }
 
 .nav-tabs li.active-tab {
@@ -276,7 +277,7 @@ footer button.d-flex:hover {
 }
 
 .nav-tabs li.active-tab a {
-  color: #B71616;
+  color: #D82828;
 }
 
 .nav-tabs li:first-child.active-tab {
@@ -292,8 +293,8 @@ footer button.d-flex:hover {
   transition: background-color 0.2s ease;
 }
 
-.nav-tabs li:hover a {
-  color: #B71616;
+.nav-tabs li:not(.active-tab):hover a {
+  color: #344054;
 }
 
 .nav-tabs li.active-tab:hover {
