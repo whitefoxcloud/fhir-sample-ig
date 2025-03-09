@@ -507,7 +507,7 @@ var(--publish-box-border); */
   }
   .breadcrumb {
     margin-bottom: 0;
-    background-color: var(--breadcrumb-bg-color);
+    /* background-color: var(--breadcrumb-bg-color); */
   }
   .breadcrumb a {
     color: var(--breadcrumb-text-color);
