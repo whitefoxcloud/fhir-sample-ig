@@ -301,3 +301,93 @@ footer button.d-flex:hover {
   background-color: #FFE5DE;
 }
 
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: white;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+  color: #475467;
+}
+
+.breadcrumb-item.active {
+  font-weight: 600;
+  color: black;
+}
+
+.breadcrumb > li.active b {
+  font-weight: 600 !important;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #D0D5DD;
+  font-size: 16px;
+}
+
+.breadcrumb-nav {
+  float: right;
+  font-size: 14px;
+}
+
+.breadcrumb-nav a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.breadcrumb > li {
+  font-family: inter;
+  font-weight: 500;
+  font-size: 14px;
+  color: #475467;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb > li.active {
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+#segment-breadcrumb {
+  margin: 32px 0px 32px 0px;
+}
+
+.breadcrumb > li:hover {
+  color: #000000;
+}
+
+.breadcrumb > li:not(.active):hover a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.breadcrumb > li a {
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-separator svg path {
+  transition: stroke 0.2s ease;
+}
+
+.breadcrumb > li a:hover {
+  color: #000000;
+  text-decoration: none;
+}
+
+

@@ -53,6 +53,28 @@
           }, 100);
         });
       })();
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const breadcrumbItems = document.querySelectorAll('.breadcrumb > li');
+
+        breadcrumbItems.forEach((item, index) => {
+      if (index === breadcrumbItems.length - 1) {
+        item.classList.add('active');
+      }
+    });
+
+        const svgSeparator = `
+          <li class="breadcrumb-separator">
+            <svg id="specChevron" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: transform 0.2s ease;">
+              <path d="M1 9L5 5L1 1" stroke="#A0AEC7" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </li>
+        `;
+
+        for (let i = breadcrumbItems.length - 1; i > 0; i--) {
+          breadcrumbItems[i-1].insertAdjacentHTML('afterend', svgSeparator);
+        }
+      });
     </script>
 
     <script type="text/javascript" src="fhir-table-scripts.js"> </script>
@@ -251,8 +273,14 @@
           {% assign shownav = site.data.info.shownav | downcase | slice: 0 %}
           <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
             <div class="container">  <!-- container -->
+
+              {% assign breadcrumb_content = site.data.pages[page.path].breadcrumb %}
               <ul class="breadcrumb">
-                {{site.data.pages[page.path].breadcrumb}}
+                {{ breadcrumb_content }}
+              </ul>
+
+
+              <!-- <ul class="breadcrumb">
                 {% if shownav == 'y' %}
                 <span style="float:right;">
                   {% if site.data.pages[page.path].previous %}
@@ -264,7 +292,7 @@
                   {% endif %}
                 </span>
                 {% endif %}
-              </ul>
+              </ul> -->
             </div>  <!-- /container -->
           </div>  <!-- /segment-breadcrumb -->
 
