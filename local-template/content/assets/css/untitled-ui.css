@@ -351,11 +351,11 @@ footer button.d-flex:hover {
   font-size: 14px;
   color: #475467;
   margin: 0;
+  transition: color 0.2s ease;
 }
 
 .breadcrumb > li.active {
   font-weight: 600;
-  color: #000000;
 }
 
 .breadcrumb-separator {
@@ -366,6 +366,28 @@ footer button.d-flex:hover {
 
 #segment-breadcrumb {
   margin: 32px 0px 32px 0px;
+}
+
+.breadcrumb > li:hover {
+  color: #000000;
+}
+
+.breadcrumb > li:not(.active):hover a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.breadcrumb > li a {
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-separator svg path {
+  transition: stroke 0.2s ease;
+}
+
+.breadcrumb > li a:hover {
+  color: #000000;
+  text-decoration: none;
 }
 
 
