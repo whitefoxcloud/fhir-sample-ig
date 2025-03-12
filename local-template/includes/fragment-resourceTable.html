@@ -1,0 +1,175 @@
+<div id="resource-info-card" class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <div id="data-rows">
+                {% if site.data.resources[resource_].url != nil %}
+                <div class="row row-item border-bottom">
+                    <div class="col-6 p-0">Official URL</div>
+                    <div class="col-6 text-end p-0 d-flex justify-content-end">
+                        <span class="copy-text d-flex">
+                            <a
+                                href="{{site.data.resources[resource_].url}}" 
+                                title="{{site.data.resources[resource_].url}}" 
+                                class="text-decoration-none url-truncate"
+                            >
+                                {{site.data.resources[resource_].url}}
+                            <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                            <button class="copy-btn d-flex justify-content-end" data-clipboard-text="{{site.data.resources[resource_].url}}" onclick="copyToClipboard(this)">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>                        
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="row row-item border-bottom">
+                    <div class="col-6 p-0">Version</div>
+                    <div class="col-6 text-end p-0 d-flex justify-content-end">
+                        <span class="copy-text d-flex">
+                            {{site.data.resources[resource_].version}}
+                            <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].version}}" onclick="copyToClipboard(this)">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>   
+                        </span>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="row row-item border-bottom">
+                    <div class="col-6 p-0">
+                        {% if site.data.resources[resource_].status.standards-status %}
+                        
+                            {% if table_prefix != nil %}
+                            {{table_prefix}}
+                            {% endif %}
+                            Standards status:
+                        
+                    </div>
+                    <div class="col-6 text-end p-0">
+                        <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
+                            {{site.data.resources[resource_].status.standards-status | capitalize}}
+                        </a>
+                        {% if site.data.resources[resource_].status.normativeVersion %}
+                        (from v{{site.data.resources[resource_].status.normativeVersion}})
+                        {% endif %}
+                        {% else %}
+                        {{site.data.resources[resource_].status.status}}
+                        {% if site.data.resources[resource_].date %}
+                        as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                
+                {% if site.data.resources[resource_].status.fmm %}
+                <div class="row row-item border-bottom">
+                    <div class="col-6 p-0">Maturity Level</div>
+                    <div class="col-6 text-end p-0">
+                        <a href="{{site.data.info.fmm-definition}}" class="text-decoration-none">{{site.data.resources[resource_].status.fmm}}</a>
+                        {% if site.data.resources[resource_].status.fmmSource %}
+                        <span title="{{site.data.resources[resource_].status.fmmSource}}">*</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
+                <div class="row row-item border-bottom">
+                    <div class="col-6 p-0">Responsible:</div>
+                    <div class="col-6 text-end p-0">
+                        {% if site.data.resources[resource_].status.link %}
+                        <a href="{{site.data.resources[resource_].status.link}}" class="text-decoration-none">{{site.data.resources[resource_].status.owner}}</a>
+                        {% else %}
+                        {{site.data.resources[resource_].status.owner}}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Hidden rows container for smooth expanding -->
+            <div class="hidden-rows-container">
+                <div class="hidden-rows">
+                    {% capture newJurisdictions %}
+                    {% for jurisdiction in site.data.resources[resource_].jurisdictions %}
+                    {% assign foundRes = false %}
+                    {% for igjur in site.data.resources[igId].jurisdictions %}
+                    {% if igjur.name == jurisdiction.name %}
+                    {% assign foundRes = true %}
+                    {% break %}
+                    {% endif %}
+                    {% endfor %}
+                    {% if foundRes == false %}
+                    {% if jurisdiction.flag %}
+                    <img alt="{{jurisdiction.name}} flag" src="assets/images/{{jurisdiction.flag}}.svg" height="16" title="{{jurisdiction.name}}"/>
+                    {% elsif jurisdiction.code %}
+                    <span title="{{jurisdiction.name}}">{{jurisdiction.code}}</span>
+                    {% else %}
+                    {{jurisdiction.name}}
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endcapture %}
+                    {% assign trimmedJurisdictions = newJurisdictions | strip %}
+                    
+                    {% if trimmedJurisdictions != "" %}
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Realm:</div>
+                        <div class="col-6 text-end p-0">{{trimmedJurisdictions}}</div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Computable Name</div>
+                        <div class="col-6 text-end p-0">
+                            <span style="font-family: monospace;">{{site.data.resources[resource_].name}}</span>
+                        </div>
+                    </div>
+                    
+                    {% if site.data.resources[resource_].identifiers %}
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Other Identifiers:</div>
+                        <div class="col-6 text-end p-0">{{site.data.resources[resource_].identifiers}}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.resources[resource_].keywords %}
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Keywords:</div>
+                        <div class="col-6 text-end p-0">{{site.data.resources[resource_].keywords}}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.resources[resource_].contexts %}
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Usage:</div>
+                        <div class="col-6 p-0 markdown-content">{{site.data.resources[resource_].contexts | markdownify}}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if site.data.resources[resource_].copyright %}
+                    <div class="row row-item border-bottom">
+                        <div class="col-6 p-0">Copyright/Legal:</div>
+                        <div class="col-6 p-0 markdown-content">{{site.data.resources[resource_].copyright | markdownify}}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="gradient-overlay"></div>
+            
+            <div class="text-center mt-3">
+                <span class="show-more" id="toggle-btn">
+                    Show more
+                    <svg style="margin-left: 8px;" id="showMoreChevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L5 5L9 1" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>            
+            </div>
+        </div>
+    </div>
+</div>
