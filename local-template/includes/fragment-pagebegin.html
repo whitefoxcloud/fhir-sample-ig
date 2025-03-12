@@ -3,8 +3,17 @@
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <style>
-      .nav-menu-container { visibility: hidden; }
-      .nav-initialized { visibility: visible; }
+      .nav-menu-container {  
+        opacity: 0;
+        transition: opacity 0.07s ease-in-out;
+      }
+      .nav-initialized { opacity: 1;
+      }
+
+      #segment-breadcrumb {
+      opacity: 0;
+      transition: opacity 0.07s ease-in-out;
+      }
     </style>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
     <title>{{site.data.pages[page.path].title | escape_once}} - {{site.data.fhir.ig.title | escape_once}} v{{site.data.fhir.ig.version | escape_once}}</title>
@@ -50,6 +59,7 @@
         window.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             document.querySelector('.nav-menu-container').classList.add('nav-initialized');
+            document.getElementById('segment-breadcrumb').style.opacity = '1';
           }, 100);
         });
       })();
@@ -58,10 +68,10 @@
         const breadcrumbItems = document.querySelectorAll('.breadcrumb > li');
 
         breadcrumbItems.forEach((item, index) => {
-      if (index === breadcrumbItems.length - 1) {
-        item.classList.add('active');
-      }
-    });
+          if (index === breadcrumbItems.length - 1) {
+          item.classList.add('active');
+          }
+        });
 
         const svgSeparator = `
           <li class="breadcrumb-separator">
@@ -75,6 +85,74 @@
           breadcrumbItems[i-1].insertAdjacentHTML('afterend', svgSeparator);
         }
       });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hiddenRowsContainer = document.querySelector(".hidden-rows-container");
+        const toggleBtn = document.getElementById("toggle-btn");
+        
+
+        if (hiddenRowsContainer.querySelectorAll(".row-item").length > 0) {
+            toggleBtn.style.display = "inline";
+        }
+
+        const chevron = document.getElementById('showMoreChevron');
+    
+        toggleBtn.addEventListener('click', function() {
+            hiddenRowsContainer.classList.toggle('expanded');
+            hiddenRowsContainer.classList.toggle("show");
+
+            
+            if (hiddenRowsContainer.classList.contains('expanded')) {
+                toggleBtn.firstChild.textContent = 'Show less ';
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                toggleBtn.firstChild.textContent = 'Show more ';
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        });
+      });
+
+      function copyToClipboard(button) {
+          const textToCopy = button.getAttribute('data-clipboard-text');
+      
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+            const path = button.querySelector('svg path');
+            const originalColor = path.getAttribute('stroke');
+            
+            path.setAttribute('stroke', '#10B981');
+            
+            setTimeout(() => {
+              path.setAttribute('stroke', '#A0AEC7');
+            }, 1000);
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          
+          try {
+            const textArea = document.createElement('textarea');
+            textArea.value = textToCopy;
+            textArea.style.position = 'fixed';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            const successful = document.execCommand('copy');
+            
+            document.body.removeChild(textArea);
+            
+            if (successful) {
+              const path = button.querySelector('svg path');
+              path.setAttribute('stroke', '#10B981');
+              setTimeout(() => {
+                path.setAttribute('stroke', '#A0AEC7');
+              }, 1000);
+            }
+          } catch (err) {
+            console.error('Fallback copy method failed:', err);
+          }
+        });
+      }
     </script>
 
     <script type="text/javascript" src="fhir-table-scripts.js"> </script>

@@ -318,12 +318,12 @@ footer button.d-flex:hover {
 }
 
 .breadcrumb-item.active {
-  font-weight: 600;
+  font-weight: 500;
   color: black;
 }
 
 .breadcrumb > li.active b {
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -347,7 +347,7 @@ footer button.d-flex:hover {
 
 .breadcrumb > li {
   font-family: inter;
-  font-weight: 500;
+  font-weight: 500 !important;
   font-size: 14px;
   color: #475467;
   margin: 0;
@@ -355,7 +355,7 @@ footer button.d-flex:hover {
 }
 
 .breadcrumb > li.active {
-  font-weight: 600;
+  font-weight: 500 !important;
 }
 
 .breadcrumb-separator {
@@ -370,6 +370,10 @@ footer button.d-flex:hover {
 
 .breadcrumb > li:hover {
   color: #000000;
+}
+
+.breadcrumb > li a b {
+  font-weight: inherit !important;
 }
 
 .breadcrumb > li:not(.active):hover a {
@@ -389,5 +393,156 @@ footer button.d-flex:hover {
   color: #000000;
   text-decoration: none;
 }
+
+.card {
+  border-radius: 8px;
+  border: 1px solid #CFD7E3;
+  margin: 16px 0px;
+}
+.card-body {
+  padding: 1rem;
+  position: relative;
+
+}
+
+.gradient-overlay {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.32) 32%, rgba(255, 255, 255, 1));
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.hidden-rows-container.expanded + .gradient-overlay {
+  opacity: 0;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background: #f3f3f3;
+  font-size: 14px;
+}
+.status-badge::before {
+  content: "●";
+  font-size: 12px;
+  margin-right: 6px;
+  color: #999;
+}
+.muted-text {
+  color: #aaa;
+}
+.show-more {
+  color: #6F7E97;
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+  transition: opacity 0.2s ease-in-out;
+  font-family: "inter";
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.show-more:hover {
+  color: #000000;
+}
+
+.show-more:hover svg path {
+  stroke: #000000;
+}
+
+
+.row-item {
+  margin: auto;
+  font-family: "inter";
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+  padding: 16px 0;
+}
+
+.row-item.border-bottom {
+  border-bottom: 1px solid #E7EBF1;
+}
+
+#data-rows > div:first-child {
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #E7EBF1;
+}
+
+.hidden-rows-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease-in-out;
+}
+.hidden-rows-container.show {
+  grid-template-rows: 1fr;
+}
+
+.hidden-rows {
+  overflow: hidden;
+}
+
+.copy-text {
+  position: relative;
+  display: block;
+  max-width: 100%;
+}
+
+.url-truncate {
+  display: inline-block;
+  max-width: calc(100% - 30px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  color: #B71616;
+}
+
+.copy-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.copy-btn:hover svg path {
+  stroke: #344054;
+}
+
+.copy-btn:focus {
+  outline: none;
+}
+
+.copy-btn:focus-visible {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+  border-radius: 4px;
+}
+
+.markdown-content p {
+  margin: 0;
+  padding: 0;
+  font-family: "inter";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
 
 
