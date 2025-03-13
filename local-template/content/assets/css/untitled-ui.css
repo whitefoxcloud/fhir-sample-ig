@@ -470,7 +470,7 @@ footer button.d-flex:hover {
   border-bottom: 1px solid #E7EBF1;
 }
 
-#data-rows > div:first-child {
+#visible-data-rows > div:first-child {
   padding-top: 0;
   padding-bottom: 16px;
 }
@@ -542,6 +542,15 @@ footer button.d-flex:hover {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+}
+
+.hidden-rows-container.show-all-content .hidden-rows {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.hidden-rows-top-bordered {
+  border-top: 1px solid #CFD7E3;
 }
 
 
