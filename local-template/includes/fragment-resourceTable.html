@@ -1,8 +1,20 @@
 <div id="resource-info-card" class="container mt-4">
     <div class="card">
         <div class="card-body">
-            <div id="data-rows">
+            {% assign visible_row_count = 0 %}
+            
+            {% comment %}Check if there will be any visible rows{% endcomment %}
+            {% assign has_url = site.data.resources[resource_].url != nil %}
+            {% assign has_standards_status = site.data.resources[resource_].status.standards-status or site.data.resources[resource_].status.status %}
+            {% assign has_fmm = site.data.resources[resource_].status.fmm %}
+            {% assign has_responsible = site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
+            
+            {% assign will_have_visible_rows = has_url or has_standards_status or has_fmm or has_responsible %}
+            
+            {% if will_have_visible_rows %}
+            <div id="visible-data-rows">
                 {% if site.data.resources[resource_].url != nil %}
+                {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
                     <div class="col-6 p-0">Official URL</div>
                     <div class="col-6 text-end p-0 d-flex justify-content-end">
@@ -24,6 +36,7 @@
                     </div>
                 </div>
                 
+                {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
                     <div class="col-6 p-0">Version</div>
                     <div class="col-6 text-end p-0 d-flex justify-content-end">
@@ -39,6 +52,7 @@
                 </div>
                 {% endif %}
                 
+                {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
                     <div class="col-6 p-0">
                         {% if site.data.resources[resource_].status.standards-status %}
@@ -66,6 +80,7 @@
                 </div>
                 
                 {% if site.data.resources[resource_].status.fmm %}
+                {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
                     <div class="col-6 p-0">Maturity Level</div>
                     <div class="col-6 text-end p-0">
@@ -78,6 +93,7 @@
                 {% endif %}
                 
                 {% if site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
+                {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
                     <div class="col-6 p-0">Responsible:</div>
                     <div class="col-6 text-end p-0">
@@ -90,9 +106,28 @@
                 </div>
                 {% endif %}
             </div>
+            {% endif %}
+
+            {% if trimmedJurisdictions != "" %}
+            {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% endif %}
+            {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% if site.data.resources[resource_].identifiers %}
+                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% endif %}
+            {% if site.data.resources[resource_].keywords %}
+                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% endif %}
+            {% if site.data.resources[resource_].contexts %}
+                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% endif %}
+            {% if site.data.resources[resource_].copyright %}
+                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
+            {% endif %}
             
-            <!-- Hidden rows container for smooth expanding -->
-            <div class="hidden-rows-container">
+            {% assign total_rows = visible_row_count | plus: hidden_row_count %}
+            
+            <div class="hidden-rows-container {% if total_rows <= 3 %}show-all-content{% endif %} {% if visible_row_count == 0 %}hidden-rows-top-bordered{% endif %}">
                 <div class="hidden-rows">
                     {% capture newJurisdictions %}
                     {% for jurisdiction in site.data.resources[resource_].jurisdictions %}
@@ -160,6 +195,7 @@
                 </div>
             </div>
 
+            {% if total_rows > 3 %}
             <div class="gradient-overlay"></div>
             
             <div class="text-center mt-3">
@@ -170,6 +206,7 @@
                     </svg>
                 </span>            
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
