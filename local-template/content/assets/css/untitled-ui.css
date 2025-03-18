@@ -446,10 +446,15 @@ footer button.d-flex:hover {
   font-family: "inter";
   font-weight: 500;
   font-size: 14px;
+  transition: color 0.2s ease-in-out;
 }
 
 .show-more:hover {
   color: #000000;
+}
+
+.show-more svg path {
+  transition: stroke 0.2s ease-in-out;
 }
 
 .show-more:hover svg path {
@@ -554,5 +559,95 @@ footer button.d-flex:hover {
   border-top: 1px solid #CFD7E3;
 }
 
+.toc-container {
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+  width: 20%;
+}
 
+.toc-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+}
+
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  border-left: 2px solid #ddd;
+  position: relative;
+}
+
+.toc-indicator {
+  position: absolute;
+  left: -2px;
+  width: 2px;
+  background-color: #E83A3A;
+  transition: transform 0.2s ease-in-out, height 0.2s ease-in-out;
+  position: absolute;
+  top: 0px;
+}
+
+.toc-item {
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #4a4a4a;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease, background-color 0.2s ease, border-left 0.2s ease;
+  margin: 0px;
+}
+
+.toc-item:hover a {
+  color: #E83A3A;
+}
+
+.toc-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.toc-item a:focus,
+.toc-item a:active a:hover {
+  outline: none;
+  text-decoration: none;
+  color: #E83A3A;
+}
+
+.toc-item.active {
+  font-weight: 500;
+  color: #E83A3A;
+}
+
+.no-underline:hover {
+  text-decoration: none;
+  color: #E83A3A;
+}
+
+.content-navigation-header p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.sticky-toc {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  width: 20%;
+  z-index: 100;
+  margin-top: 16px;
+}
+
+.toc-item:hover {
+  background-color: rgba(232, 58, 58, 0.05);
+  border-radius: 4px;
+  transition: background-color 0.2s ease, border-radius 0.2s ease;
+}
 
