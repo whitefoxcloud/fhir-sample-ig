@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let initialLoad = true;
   let preserveHash = false;
   let userHasScrolled = false;
+  let lastSelectedItem = null;
 
   const sectionPositions = Array.from(sections).map((section) => {
     const id =
@@ -25,43 +26,56 @@ document.addEventListener("DOMContentLoaded", function () {
       section.previousElementSibling.getAttribute("name");
     return {
       id: id || section.id,
-      offsetTop: section.offsetTop - 120,
+      offsetTop: section.offsetTop + 74,
       element: section,
     };
   });
 
   function updateIndicator(activeItem) {
     if (!activeItem || !indicator) return;
+    indicator.style.opacity = "1";
     indicator.style.transform = `translateY(${activeItem.offsetTop}px)`;
     indicator.style.height = `${activeItem.offsetHeight}px`;
   }
 
   function highlightActiveTocItem() {
     if (manualSelectionActive || initialLoad) return;
+    
+    if (lastSelectedItem && Math.abs(window.scrollY - lastSelectedItem.scrollY) < 50) {
+      return;
+    }
 
     const scrollPosition = window.scrollY;
-
-    let activeSection = sectionPositions[0]?.id;
-    for (let i = 0; i < sectionPositions.length; i++) {
-      if (scrollPosition >= sectionPositions[i].offsetTop) {
-        activeSection = sectionPositions[i].id;
-      } else {
-        break;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrolledToBottom = scrollPosition + clientHeight >= scrollHeight - 50;
+    
+    let activeSection = null;
+    
+    if (scrolledToBottom && sectionPositions.length > 0) {
+      activeSection = sectionPositions[sectionPositions.length - 1].id;
+    } else {
+      for (let i = 0; i < sectionPositions.length; i++) {
+        if (scrollPosition >= sectionPositions[i].offsetTop) {
+          activeSection = sectionPositions[i].id;
+        } else {
+          break;
+        }
       }
     }
 
-    tocItems.forEach((item) => {
-      item.classList.remove("active");
-    });
-
     if (activeSection) {
+      tocItems.forEach((item) => {
+        item.classList.remove("active");
+      });
+
       const activeTocItem = document.querySelector(
         `.toc-item a[data-section-id="${activeSection}"]`
       );
+      
       if (activeTocItem) {
         const activeLi = activeTocItem.parentElement;
         activeLi.classList.add("active");
-
         updateIndicator(activeLi);
 
         if (!preserveHash) {
@@ -70,6 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
             history.replaceState(null, null, `#${activeSection}`);
           }
         }
+      }
+    } else {
+      tocItems.forEach((item) => {
+        item.classList.remove("active");
+      });
+      
+      if (indicator) {
+        indicator.style.opacity = "0";
       }
     }
   }
@@ -104,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (section) {
-          const headerOffset = 100;
+          const headerOffset = 74;
           const elementPosition = section.getBoundingClientRect().top;
           const offsetPosition =
             elementPosition + window.pageYOffset - headerOffset;
@@ -113,8 +135,13 @@ document.addEventListener("DOMContentLoaded", function () {
             top: offsetPosition,
             behavior: "smooth",
           });
-        } else {
-          window.location.hash = sectionId;
+          
+          lastSelectedItem = {
+            item: this,
+            section: section,
+            scrollY: offsetPosition,
+            time: Date.now()
+          };
         }
       }
 
@@ -131,65 +158,26 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     if (targetTocItem) {
-      const sectionId = hash;
-      preserveHash = true;
-
-      let section = document.getElementById(sectionId);
-
-      if (!section) {
-        section = document.querySelector(`a[name="${sectionId}"]`);
-      }
-
-      if (!section) {
-        const anchor = document.querySelector(`a[name="${sectionId}"]`);
-        if (anchor && anchor.nextElementSibling) {
-          section = anchor.nextElementSibling;
-        }
-      }
-
-      if (section) {
-        setTimeout(() => {
-          manualSelectionActive = true;
-          initialLoad = false;
-          const headerOffset = 100;
-          const elementPosition = section.getBoundingClientRect().top;
-          const offsetPosition =
-            elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "auto",
-          });
-
-          const targetLi = targetTocItem.parentElement;
-          document
-            .querySelector(".toc-item.active")
-            ?.classList.remove("active");
-          targetLi.classList.add("active");
-          updateIndicator(targetLi);
-
-          manualSelectionActive = true;
-          initialLoad = false;
-
-          if (manualSelectionTimer) clearTimeout(manualSelectionTimer);
-          manualSelectionTimer = setTimeout(() => {
-            manualSelectionActive = false;
-          }, 1000);
-        }, 100);
-      }
+      setTimeout(() => {
+        targetTocItem.parentElement.click();
+      }, 200);
     }
   }
 
+  let scrollTimeout;
   window.addEventListener("scroll", function () {
     if (!userHasScrolled) {
       userHasScrolled = true;
-
       setTimeout(() => {
         preserveHash = false;
-      }, 1000);
+      }, 300);
     }
 
     if (initialLoad) initialLoad = false;
-    highlightActiveTocItem();
+    
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      highlightActiveTocItem();
+    }, 50);
   });
 });
