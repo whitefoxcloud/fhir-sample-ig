@@ -81,16 +81,19 @@
   
   pre.json {
     width: 100%;
+    max-width: 1164px;
     overflow: scroll;
   }
   
   pre.xml {
     width: 100%;
+    max-width: 1164px;
     overflow: scroll;
   }
   
   pre.rdf {
     width: 100%;
+    max-width: 1164px;
     overflow: scroll;
   }
   
