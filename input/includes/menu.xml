@@ -4,6 +4,14 @@
       background-color: #2A3C5E !important;
       border-radius: 4px !important;
     }
+    
+    .collapse {
+      transition: height 0.3s ease;
+    }
+    
+    svg {
+      transition: transform 0.3s ease;
+    }
   </style>
   <ul class="nav flex-column w-100">
       <li class="nav-item">
@@ -67,169 +75,5 @@
       </div>
     </li>
   </ul>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const myIgChevron = document.getElementById('myIgChevron');
-    const specChevron = document.getElementById('specChevron');
-    const supportChevron = document.getElementById('supportChevron');
-    
-    const myIgTrigger = document.querySelector('[href="#myIgSubmenu"]');
-    const specTrigger = document.querySelector('[href="#specSubmenu"]');
-    const supportTrigger = document.querySelector('[href="#supportSubmenu"]');
-    
-    const myIgSubmenu = document.getElementById('myIgSubmenu');
-    const specSubmenu = document.getElementById('specSubmenu');
-    const supportSubmenu = document.getElementById('supportSubmenu');
-    
-    let myIgRotated = localStorage.getItem('myIgRotated') === 'true' || myIgSubmenu.classList.contains('show');
-    let specRotated = localStorage.getItem('specRotated') === 'true' || specSubmenu.classList.contains('show');
-    let supportRotated = localStorage.getItem('supportRotated') === 'true' || supportSubmenu.classList.contains('show');
-    
-    myIgChevron.style.transform = myIgRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-    specChevron.style.transform = specRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-    supportChevron.style.transform = supportRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-    
-    if (myIgRotated) {
-      myIgSubmenu.classList.add('show');
-    } else {
-      myIgSubmenu.classList.remove('show');
-    }
-    
-    if (specRotated) {
-      specSubmenu.classList.add('show');
-    } else {
-      specSubmenu.classList.remove('show');
-    }
-    
-    if (supportRotated) {
-      supportSubmenu.classList.add('show');
-    } else {
-      supportSubmenu.classList.remove('show');
-    }
-    
-    myIgTrigger.addEventListener('mousedown', function(e) {
-      myIgRotated = !myIgRotated;
-      myIgChevron.style.transform = myIgRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-      localStorage.setItem('myIgRotated', myIgRotated);
-    });
-    
-    specTrigger.addEventListener('mousedown', function(e) {
-      specRotated = !specRotated;
-      specChevron.style.transform = specRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-      localStorage.setItem('specRotated', specRotated);
-    });
-    
-    supportTrigger.addEventListener('mousedown', function(e) {
-      supportRotated = !supportRotated;
-      supportChevron.style.transform = supportRotated ? 'rotate(90deg)' : 'rotate(0deg)';
-      localStorage.setItem('supportRotated', supportRotated);
-    });
-    
-    const currentPath = window.location.pathname;
-    const filename = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-    
-    function applySelectedStyling(selectedHref) {
-      // Clear any previous selection
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.style.backgroundColor = 'transparent';
-        link.style.borderRadius = '0';
-      });
-      
-      document.querySelectorAll('.nav-link').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === selectedHref) {
-          link.style.backgroundColor = '#2A3C5E';
-          link.style.borderRadius = '4px';
-          
-          const parentSubmenu = link.closest('.collapse');
-          if (parentSubmenu) {
-            parentSubmenu.classList.add('show');
-            
-            if (parentSubmenu.id === 'myIgSubmenu') {
-              myIgChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('myIgRotated', 'true');
-            } else if (parentSubmenu.id === 'specSubmenu') {
-              specChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('specRotated', 'true');
-            } else if (parentSubmenu.id === 'supportSubmenu') {
-              supportChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('supportRotated', 'true');
-            }
-          }
-          
-          localStorage.setItem('selectedMenuItem', href);
-        }
-      });
-    }
-    
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (!link.hasAttribute('data-bs-toggle')) {
-        link.addEventListener('click', function() {
-          const href = this.getAttribute('href');
-          if (href && !href.startsWith('http') && !href.startsWith('#')) {
-            applySelectedStyling(href);
-          }
-        });
-      }
-    });
-    
-    const savedMenuItem = localStorage.getItem('selectedMenuItem');
-    
-    if (filename) {
-      applySelectedStyling(filename);
-    } 
-    else if (filename === '' || filename === 'index.html') {
-      applySelectedStyling('index.html');
-    }
-    else if (savedMenuItem) {
-      applySelectedStyling(savedMenuItem);
-    }
-    
-    if (!localStorage.getItem('selectedMenuItem') && filename) {
-      document.querySelectorAll('.nav-link').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === filename) {
-          applySelectedStyling(href);
-        }
-      });
-    }
-
-
-       function applySelectedStyling(selectedHref) {
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('menu-item-selected');
-        link.style.backgroundColor = 'transparent';
-        link.style.borderRadius = '0';
-      });
-      
-      document.querySelectorAll('.nav-link').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === selectedHref) {
-          link.classList.add('menu-item-selected');
-          link.style.backgroundColor = '#2A3C5E';
-          link.style.borderRadius = '4px';
-          
-          const parentSubmenu = link.closest('.collapse');
-          if (parentSubmenu) {
-            parentSubmenu.classList.add('show');
-            
-            if (parentSubmenu.id === 'myIgSubmenu') {
-              myIgChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('myIgRotated', 'true');
-            } else if (parentSubmenu.id === 'specSubmenu') {
-              specChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('specRotated', 'true');
-            } else if (parentSubmenu.id === 'supportSubmenu') {
-              supportChevron.style.transform = 'rotate(90deg)';
-              localStorage.setItem('supportRotated', 'true');
-            }
-          }
-          
-          localStorage.setItem('selectedMenuItem', href);
-        }
-      });
-    }
-  });
-</script>
+  <script src="{{site.data.info.assets}}assets/js/sidebar-menu.js"></script>
 </nav>
