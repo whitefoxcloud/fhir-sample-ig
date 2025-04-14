@@ -651,3 +651,26 @@ footer button.d-flex:hover {
   transition: background-color 0.2s ease, border-radius 0.2s ease;
 }
 
+.footer-primary-link {
+  color: #1A66FF;
+  transition: color 0.2s ease;
+}
+
+.footer-primary-link:hover {
+  color: #1745a3;
+}
+
+.footer-primary-link svg path {
+  stroke: #1A66FF;
+  transition: stroke 0.2s ease;
+}
+
+.footer-primary-link:hover svg path {
+  stroke: #1745a3;
+}
+
+#sticky-header {
+  position: sticky;
+  top: 0px;
+  z-index: 999;
+}
