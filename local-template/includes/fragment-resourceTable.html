@@ -12,7 +12,7 @@
             {% assign will_have_visible_rows = has_url or has_standards_status or has_fmm or has_responsible %}
             
             {% if will_have_visible_rows %}
-            <div id="visible-data-rows">
+            <!-- <div id="visible-data-rows"> -->
                 {% if site.data.resources[resource_].url != nil %}
                 {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
@@ -38,46 +38,49 @@
                 
                 {% assign visible_row_count = visible_row_count | plus: 1 %}
                 <div class="row row-item border-bottom">
-                    <div class="col-6 p-0">Version</div>
-                    <div class="col-6 text-end p-0 d-flex justify-content-end">
-                        <span class="copy-text d-flex">
+                    <div id="1" class="d-flex align-items-stretch p-0">
+                        <div class="col-3 p-0 d-flex align-items-center">Version</div>
+                        <div class="col-3 text-end p-0 d-flex justify-content-end align-items-center">
+                          <span class="copy-text d-flex">
                             {{site.data.resources[resource_].version}}
                             <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].version}}" onclick="copyToClipboard(this)">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
                             </button>   
-                        </span>
-                    </div>
+                          </span>
+                        </div>
+                        <!-- Vertical divider -->
+                        <div style="width:1px; background:#DBE1EA; margin: 0 42px; min-height: 25px;"></div>
+
+                        <div id="2" class="d-flex flex-grow-1 align-items-center justify-content-between">
+                          <div class="col-3 p-0">
+                            {% if site.data.resources[resource_].status.standards-status %}
+                              {% if table_prefix != nil %}
+                                {{table_prefix}}
+                              {% endif %}
+                              Standards status:
+                            {% endif %}
+                          </div>
+                          <div class="col-3 text-end p-0">
+                            {% if site.data.resources[resource_].status.standards-status %}
+                              <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
+                                {{site.data.resources[resource_].status.standards-status | capitalize}}
+                              </a>
+                              {% if site.data.resources[resource_].status.normativeVersion %}
+                                (from v{{site.data.resources[resource_].status.normativeVersion}})
+                              {% endif %}
+                            {% else %}
+                              {{site.data.resources[resource_].status.status}}
+                              {% if site.data.resources[resource_].date %}
+                                as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
+                              {% endif %}
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
                 </div>
                 {% endif %}
-                
-                {% assign visible_row_count = visible_row_count | plus: 1 %}
-                <div class="row row-item border-bottom">
-                    <div class="col-6 p-0">
-                        {% if site.data.resources[resource_].status.standards-status %}
-                        
-                            {% if table_prefix != nil %}
-                            {{table_prefix}}
-                            {% endif %}
-                            Standards status:
-                        
-                    </div>
-                    <div class="col-6 text-end p-0">
-                        <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
-                            {{site.data.resources[resource_].status.standards-status | capitalize}}
-                        </a>
-                        {% if site.data.resources[resource_].status.normativeVersion %}
-                        (from v{{site.data.resources[resource_].status.normativeVersion}})
-                        {% endif %}
-                        {% else %}
-                        {{site.data.resources[resource_].status.status}}
-                        {% if site.data.resources[resource_].date %}
-                        as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
-                        {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
                 
                 {% if site.data.resources[resource_].status.fmm %}
                 {% assign visible_row_count = visible_row_count | plus: 1 %}
@@ -105,7 +108,7 @@
                     </div>
                 </div>
                 {% endif %}
-            </div>
+            <!-- </div> -->
             {% endif %}
 
             {% if trimmedJurisdictions != "" %}
@@ -127,8 +130,8 @@
             
             {% assign total_rows = visible_row_count | plus: hidden_row_count %}
             
-            <div class="hidden-rows-container {% if total_rows <= 3 %}show-all-content{% endif %} {% if visible_row_count == 0 %}hidden-rows-top-bordered{% endif %}">
-                <div class="hidden-rows">
+            <!-- <div class="">
+                <div class=""> -->
                     {% capture newJurisdictions %}
                     {% for jurisdiction in site.data.resources[resource_].jurisdictions %}
                     {% assign foundRes = false %}
@@ -192,21 +195,8 @@
                         <div class="col-6 p-0 markdown-content">{{site.data.resources[resource_].copyright | markdownify}}</div>
                     </div>
                     {% endif %}
-                </div>
-            </div>
-
-            {% if total_rows > 3 %}
-            <div class="gradient-overlay"></div>
-            
-            <div class="text-center mt-3">
-                <span class="show-more" id="toggle-btn">
-                    Show more
-                    <svg style="margin-left: 8px;" id="showMoreChevron" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L5 5L9 1" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>            
-            </div>
-            {% endif %}
+                <!-- </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -398,6 +398,7 @@ footer button.d-flex:hover {
   border-radius: 8px;
   border: 1px solid #CFD7E3;
   margin: 16px 0px;
+  background-color: #F8F8F8;
 }
 .card-body {
   padding: 1rem;
@@ -468,7 +469,7 @@ footer button.d-flex:hover {
   font-size: 14px;
   font-weight: 400;
   color: black;
-  padding: 16px 0;
+  padding: 12px 0;
 }
 
 .row-item.border-bottom {
@@ -511,7 +512,7 @@ footer button.d-flex:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: middle;
-  color: #B71616;
+  color: #428bca;
 }
 
 .copy-btn {
@@ -673,4 +674,27 @@ footer button.d-flex:hover {
   position: sticky;
   top: 0px;
   z-index: 999;
+}
+
+.row-item:last-child {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.row-item:first-child {
+  padding-top: 0 !important;
+}
+
+.footer-navigation-link {
+  color: #6F7E97;
+  transition: color 0.3s;
+}
+
+.footer-navigation-link:hover {
+  color: #434c5d;
+}
+
+.footer-navigation-link:hover svg path {
+  stroke: #434c5d;
+  transition: stroke 0.3s;
 }
