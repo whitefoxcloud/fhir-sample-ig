@@ -1,29 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 body {
- font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
 }
 
 :root {
-  --ui-gray-50: #F9FAFB;
-  --ui-gray-100: #F2F4F7;
-  --ui-gray-200: #EAECF0;
-  --ui-gray-300: #DBE1EA;
-  --ui-gray-400: #98A2B3;
-  --ui-gray-500: #6F7E97; 
+  --ui-gray-50: #f9fafb;
+  --ui-gray-100: #f2f4f7;
+  --ui-gray-200: #eaecf0;
+  --ui-gray-300: #dbe1ea;
+  --ui-gray-400: #98a2b3;
+  --ui-gray-500: #6f7e97;
   --ui-gray-600: #475467;
   --ui-gray-700: #344054;
-  --ui-gray-800: #1D2939;
+  --ui-gray-800: #1d2939;
   --ui-gray-900: #101828;
 
-  
-  --ui-primary-50: #F0F9FF;
-  --ui-primary-100: #E0F2FE;
-  --ui-primary-600: #0086C9;
-  --ui-primary-700: #026AA2;
-  
-  --ui-font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  
+  --ui-primary-50: #f0f9ff;
+  --ui-primary-100: #e0f2fe;
+  --ui-primary-600: #0086c9;
+  --ui-primary-700: #026aa2;
+
+  --ui-font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
   --ui-border-radius-sm: 6px;
   --ui-border-radius-md: 8px;
   --ui-border-radius-lg: 12px;
@@ -127,15 +127,15 @@ body {
 }
 
 .ui-text-error {
-  color: #E83A3A;
+  color: #e83a3a;
 }
 
 .ui-text-success {
-  color: #12B76A;
+  color: #12b76a;
 }
 
 .ui-text-warning {
-  color: #F79009;
+  color: #f79009;
 }
 
 .ui-text-subtle {
@@ -219,7 +219,7 @@ body {
 }
 
 .footer-link:hover {
-  color: #3C4554 !important;
+  color: #3c4554 !important;
   text-decoration: none;
   transition: color 0.2s ease;
 }
@@ -227,7 +227,7 @@ body {
 footer button.d-flex {
   background-color: transparent !important;
   transition: background-color 0.2s ease;
-  border: 1px solid #D0D5DD;
+  border: 1px solid #d0d5dd;
 }
 
 footer button.d-flex:hover {
@@ -239,7 +239,7 @@ footer button.d-flex:hover {
   padding: 0;
   margin: 0;
   position: relative;
-  border: 1px solid #FFE5DE;
+  border: 1px solid #ffe5de;
 }
 
 .nav-tabs li:first-child {
@@ -273,11 +273,11 @@ footer button.d-flex:hover {
 }
 
 .nav-tabs li.active-tab {
-  background-color: #FFE5DE;
+  background-color: #ffe5de;
 }
 
 .nav-tabs li.active-tab a {
-  color: #D82828;
+  color: #d82828;
 }
 
 .nav-tabs li:first-child.active-tab {
@@ -289,7 +289,7 @@ footer button.d-flex:hover {
 }
 
 .nav-tabs li:hover {
-  background-color: #FFE5DE;
+  background-color: #ffe5de;
   transition: background-color 0.2s ease;
 }
 
@@ -298,7 +298,7 @@ footer button.d-flex:hover {
 }
 
 .nav-tabs li.active-tab:hover {
-  background-color: #FFE5DE;
+  background-color: #ffe5de;
 }
 
 .breadcrumb {
@@ -331,7 +331,7 @@ footer button.d-flex:hover {
 
 .breadcrumb-separator {
   margin: 0 8px;
-  color: #D0D5DD;
+  color: #d0d5dd;
   font-size: 16px;
 }
 
@@ -396,14 +396,13 @@ footer button.d-flex:hover {
 
 .card {
   border-radius: 8px;
-  border: 1px solid #CFD7E3;
+  border: 1px solid #cfd7e3;
   margin: 16px 0px;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
 .card-body {
   padding: 1rem;
   position: relative;
-
 }
 
 .gradient-overlay {
@@ -412,7 +411,12 @@ footer button.d-flex:hover {
   left: 0;
   right: 0;
   height: 60px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.32) 32%, rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.32) 32%,
+    rgba(255, 255, 255, 1)
+  );
   pointer-events: none;
   transition: opacity 0.2s ease;
 }
@@ -439,7 +443,7 @@ footer button.d-flex:hover {
   color: #aaa;
 }
 .show-more {
-  color: #6F7E97;
+  color: #6f7e97;
   font-size: 14px;
   cursor: pointer;
   display: none;
@@ -462,7 +466,6 @@ footer button.d-flex:hover {
   stroke: #000000;
 }
 
-
 .row-item {
   margin: auto;
   font-family: "inter";
@@ -473,7 +476,7 @@ footer button.d-flex:hover {
 }
 
 .row-item.border-bottom {
-  border-bottom: 1px solid #E7EBF1;
+  border-bottom: 1px solid #e7ebf1;
 }
 
 #visible-data-rows > div:first-child {
@@ -482,7 +485,7 @@ footer button.d-flex:hover {
 }
 
 .border-bottom {
-  border-bottom: 1px solid #E7EBF1;
+  border-bottom: 1px solid #e7ebf1;
 }
 
 .hidden-rows-container {
@@ -557,7 +560,7 @@ footer button.d-flex:hover {
 }
 
 .hidden-rows-top-bordered {
-  border-top: 1px solid #CFD7E3;
+  border-top: 1px solid #cfd7e3;
 }
 
 .toc-container {
@@ -584,8 +587,9 @@ footer button.d-flex:hover {
   position: absolute;
   left: -2px;
   width: 2px;
-  background-color: #E83A3A;
-  transition: transform 0.2s ease-in-out, height 0.2s ease-in-out, opacity 0.3s ease;
+  background-color: #e83a3a;
+  transition: transform 0.2s ease-in-out, height 0.2s ease-in-out,
+    opacity 0.3s ease;
   position: absolute;
   top: 0px;
 }
@@ -602,7 +606,7 @@ footer button.d-flex:hover {
 }
 
 .toc-item:hover a {
-  color: #E83A3A;
+  color: #e83a3a;
 }
 
 .toc-item a {
@@ -616,17 +620,17 @@ footer button.d-flex:hover {
 .toc-item a:active a:hover {
   outline: none;
   text-decoration: none;
-  color: #E83A3A;
+  color: #e83a3a;
 }
 
 .toc-item.active {
   font-weight: 500;
-  color: #E83A3A;
+  color: #e83a3a;
 }
 
 .no-underline:hover {
   text-decoration: none;
-  color: #E83A3A;
+  color: #e83a3a;
 }
 
 .content-navigation-header p {
@@ -641,6 +645,7 @@ footer button.d-flex:hover {
   height: fit-content;
   max-height: calc(100vh - 160px);
   overflow-y: auto;
+  min-width: min-content;
   width: 20%;
   z-index: 100;
   margin-top: 16px;
@@ -653,7 +658,7 @@ footer button.d-flex:hover {
 }
 
 .footer-primary-link {
-  color: #1A66FF;
+  color: #1a66ff;
   transition: color 0.2s ease;
 }
 
@@ -662,7 +667,7 @@ footer button.d-flex:hover {
 }
 
 .footer-primary-link svg path {
-  stroke: #1A66FF;
+  stroke: #1a66ff;
   transition: stroke 0.2s ease;
 }
 
@@ -686,7 +691,7 @@ footer button.d-flex:hover {
 }
 
 .footer-navigation-link {
-  color: #6F7E97;
+  color: #6f7e97;
   transition: color 0.3s;
 }
 
@@ -697,4 +702,93 @@ footer button.d-flex:hover {
 .footer-navigation-link:hover svg path {
   stroke: #434c5d;
   transition: stroke 0.3s;
+}
+
+@media (max-width: 991px) {
+  #side-bar {
+    display: none !important;
+  }
+
+  .main-section {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .main-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.sidebar-hidden {
+  display: none !important;
+}
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  header {
+    flex-direction: column !important;
+    height: 320px !important;
+    gap: 16px !important;
+  }
+
+  #footer-logo {
+    justify-content: center !important;
+  }
+
+  #footer-logo-section {
+    flex-direction: column !important;
+    gap: 32px !important;
+  }
+
+  #footer-logo-section > div {
+    width: 100% !important;
+  }
+
+  #footer-text-link {
+    flex-direction: column !important;
+  }
+
+  #footer-text-link > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  footer {
+    min-width: auto !important;
+    width: 100% !important;
+    padding: 32px 48px !important;
+    text-align: center !important;
+  }
+
+  #footer-logo-section .d-flex.flex-column > button {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #footer-logo-section .d-flex.flex-column[style*="width: 60%"] {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-primary-link {
+    display: block !important;
+    margin-bottom: 8px !important;
+  }
+
+  #footer-text-link > div:first-child {
+    flex-wrap: wrap !important;
+  }
+
+  header {
+    flex-direction: column !important;
+    height: 320px !important;
+    gap: 16px !important;
+  }
 }
