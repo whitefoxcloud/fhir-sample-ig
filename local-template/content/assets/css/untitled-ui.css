@@ -617,18 +617,26 @@ footer button.d-flex:hover {
   cursor: pointer;
   padding: 8px;
   position: relative;
-  transition: transform 0.3s ease;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-toggle:hover {
+  background-color: #f2f4f7;
 }
 
 .mobile-menu-toggle svg {
   transition: opacity 0.2s ease, transform 0.3s ease;
+  position: absolute;
 }
 
 .mobile-menu-toggle .hamburger-icon,
 .mobile-menu-toggle .close-icon {
-  position: absolute;
-  top: 0;
-  left: 0;
   opacity: 1;
   transition: opacity 0.2s ease;
 }
@@ -751,52 +759,6 @@ body.menu-open {
   padding-left: 24px;
 }
 
-/* @media (max-width: 1050px) {
-  header {
-    height: 74px !important;
-    gap: 16px !important;
-  }
-
-  #footer-logo {
-    justify-content: center !important;
-  }
-
-  #footer-logo-section {
-    flex-direction: column !important;
-    gap: 32px !important;
-  }
-
-  #footer-logo-section > div {
-    width: 100% !important;
-  }
-
-  #footer-text-link {
-    flex-direction: column !important;
-  }
-
-  #footer-text-link > div {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 16px !important;
-  }
-
-  footer {
-    min-width: auto !important;
-    width: 100% !important;
-    padding: 32px 48px !important;
-    text-align: center !important;
-  }
-
-  #footer-logo-section .d-flex.flex-column > button {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  #footer-logo-section .d-flex.flex-column[style*="width: 60%"] {
-    width: 100% !important;
-  }
-} */
-
 @media (max-width: 1050px) {
   header {
     height: 74px !important;
@@ -862,10 +824,6 @@ body.menu-open {
 
   .mobile-menu-toggle {
     display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
   }
 
   #sticky-header {
