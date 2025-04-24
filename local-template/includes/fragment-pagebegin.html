@@ -121,6 +121,42 @@
       }
     </script>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const fullscreenMenu = document.getElementById('fullscreen-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && fullscreenMenu) {
+      mobileMenuToggle.addEventListener('click', function() {
+        if (fullscreenMenu.style.display === 'none' || fullscreenMenu.style.display === '') {
+          fullscreenMenu.style.display = 'flex';
+          fullscreenMenu.classList.add('open');
+          body.classList.add('menu-open');
+          mobileMenuToggle.classList.add('active');
+        } else {
+          fullscreenMenu.style.display = 'none';
+          fullscreenMenu.classList.remove('open');
+          body.classList.remove('menu-open');
+          mobileMenuToggle.classList.remove('active');
+        }
+      });
+    }
+
+    function adjustMobileMenuPosition() {
+      const header = document.getElementById('sticky-header');
+      if (header && fullscreenMenu) {
+        const headerRect = header.getBoundingClientRect();
+        const headerHeight = headerRect.height;
+        fullscreenMenu.style.top = `${headerHeight}px`;
+      }
+    }
+
+    adjustMobileMenuPosition();
+    window.addEventListener('resize', adjustMobileMenuPosition);
+  });
+</script>
+
     <script type="text/javascript" src="fhir-table-scripts.js"> </script>
     <script type="text/javascript" src="{{site.data.info.assets}}assets/js/table-content-scroll.js"> </script>
 
@@ -164,87 +200,129 @@
         </style>
         
         <header id="sticky-header" class="d-flex justify-content-between align-items-center top-0 w-100 bg-white" 
-               style="height: 50px; padding: 36px 48px; border: 1px solid #E7EBF1; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);">
-          <div style="display: flex; justify-content: center; align-items: center; gap: 24px;">
-            <img width="105px" height="38px" src="{{site.data.info.assets}}assets/ico/hl7-logo.png" alt="HL7 Logo">
-            <img width="115px" height="40px" src="{{site.data.info.assets}}assets/ico/sparked-logo.png" alt="Sparked Logo">
-          </div>
+        style="height: 50px; padding: 36px 48px; border: 1px solid #E7EBF1; z-index: 1000; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);">
+   <div class="header-logos" style="display: flex; justify-content: center; align-items: center; gap: 24px;">
+    <img class="mobile-only-logo" width="83px" height="42px" src="{{site.data.info.assets}}assets/ico/sidebar-FHIR-logo.png" alt="FHIR sidebar Logo">
+     <img width="105px" height="38px" src="{{site.data.info.assets}}assets/ico/hl7-logo.png" alt="HL7 Logo">
+     <img width="115px" height="40px" src="{{site.data.info.assets}}assets/ico/sparked-logo.png" alt="Sparked Logo">
+   </div>
+ 
+   <div class="header-title" style="display: flex; align-items: center; flex-direction: column;">   
+     <div style="font-size: 16px; font-weight: 600; color: #000000;">AU Core Implementation Guide</div>
+     <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; color: #6F7E97;">1.0.0-ci-build - CI Build 
+       <span style="font-size: 22px; font-weight: 500;">🇦🇺</span>
+     </div>
+   </div>
+ 
+   <div class="header-search">
+     <div class="position-relative" style="max-width: 249px;">
+       <input type="text" placeholder="Search" class="ui-input" style="padding-left: 38px; margin: 0px;">
+       <span class="d-flex justify-content-center position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <path d="M13 13L10.6667 10.6667M12.3333 6.66667C12.3333 9.79628 9.79628 12.3333 6.66667 12.3333C3.53705 12.3333 1 9.79628 1 6.66667C1 3.53705 3.53705 1 6.66667 1C9.79628 1 12.3333 3.53705 12.3333 6.66667Z" stroke="#889AB9" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+       </span>
+     </div>
+   </div>
+   
+  <button id="mobile-menu-toggle" class="mobile-menu-toggle">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="#2A3C5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6l12 12" stroke="#2A3C5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+ </header>
 
-
-        <div style="display: flex; align-items: center; flex-direction: column;">   
-          <div style="font-size: 16px; font-weight: 600; color: #000000;">AU Core Implementation Guide</div>
-          <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; color: #6F7E97;">1.0.0-ci-build - CI Build 
-            <span style="font-size: 22px; font-weight: 500;">🇦🇺</span>
-          </div>
+<div id="fullscreen-menu" class="fullscreen-menu" style="display: none;">
+  <div class="fullscreen-menu-container">
+      {% include menu.xml %}
+   
+    <div style="margin-top: auto;"> 
+      <div class="header-title" style="display: flex; align-items: center; flex-direction: column; margin-bottom: 10px;">   
+        <div style="font-size: 16px; font-weight: 600; color: #b9b9b9;">AU Core Implementation Guide</div>
+        <div style="display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; color: #b9b9b9;">1.0.0-ci-build - CI Build 
+          <span style="font-size: 22px; font-weight: 500;">🇦🇺</span>
         </div>
-  
-        <div>
-          <div class="position-relative" style="max-width: 249px;">
-            <input type="text" placeholder="Search" class="ui-input" style="padding-left: 38px; margin: 0px;">
-            <span class="d-flex justify-content-center position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M13 13L10.6667 10.6667M12.3333 6.66667C12.3333 9.79628 9.79628 12.3333 6.66667 12.3333C3.53705 12.3333 1 9.79628 1 6.66667C1 3.53705 3.53705 1 6.66667 1C9.79628 1 12.3333 3.53705 12.3333 6.66667Z" stroke="#889AB9" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </div>
+      </div>
+      <div class="mobile-search-container">
+        <div class="position-relative" style="width: 100%;">
+          <input type="text" placeholder="Search" class="mobile-search-input">
+          <span class="d-flex justify-content-center position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 13L10.6667 10.6667M12.3333 6.66667C12.3333 9.79628 9.79628 12.3333 6.66667 12.3333C3.53705 12.3333 1 9.79628 1 6.66667C1 3.53705 3.53705 1 6.66667 1C9.79628 1 12.3333 3.53705 12.3333 6.66667Z" stroke="#889AB9" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
         </div>
-      </header>
+      </div>
+    </div>
+  </div>
+</div>
 
       <a class="dropdown-item" style="display: none;" href="v1.0.0" {% raw %}{% if site.data.pages[page.path].version == 'v1.0.0' %}{% endraw %}style="font-weight: bold;"{% raw %}{% endif %}{% endraw %}>v1.0.0</a>
 
         <div id="sampleContainer" class="d-flex flex-column h-100" style="padding: 32px 48px 48px 48px;">
-          <div id="segment-navbar" class="segment" style="display: none;">  <!-- segment-navbar -->
-            <div id="stripe"> </div>
-            <div class="container">  <!-- container -->
-              <!-- HEADER CONTENT -->
-              <nav class="navbar navbar-inverse">
-                <!--status-bar-->
-                <div class="container">
-                  <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button" style="z-index: 100;">
-                    <span class="icon-bar"> </span>
-                    <span class="icon-bar"> </span>
-                    <span class="icon-bar"> </span>
-                  </button>
-                  <a class="navbar-brand hidden" href="{{site.data.fhir.path}}index.html">FHIR</a>
-                  <div class="nav-collapse collapse navbar-inverse-collapse">
-                    {% include menu.xml %}
-                  </div>  <!-- /.nav-collapse -->
-                </div>  <!-- /.container -->
-              </nav>  <!-- /.navbar -->
-              <!-- /HEADER CONTENT -->
-            </div>  <!-- /container -->
-          </div>  <!-- /segment-navbar -->
-          
           <!--ReleaseHeader--><p id="publish-box">Publish Box goes here</p><!--EndReleaseHeader-->
 
           <!--status-bar-->
           {% assign shownav = site.data.info.shownav | downcase | slice: 0 %}
-          <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+          <div name="top" id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
             <div class="container">  <!-- container -->
 
               {% assign breadcrumb_content = site.data.pages[page.path].breadcrumb %}
               <ul class="breadcrumb">
                 {{ breadcrumb_content }}
               </ul>
-
-
-              <!-- <ul class="breadcrumb">
-                {% if shownav == 'y' %}
-                <span style="float:right;">
-                  {% if site.data.pages[page.path].previous %}
-                  <a href="{{site.data.pages[page.path].previous}}">&lt;prev</a> | 
-                  {% endif %}
-                  <a href="#bottom">bottom</a>
-                  {% if site.data.pages[page.path].next %}
-                  | <a href="{{site.data.pages[page.path].next}}">next&gt;</a>
-                  {% endif %}
-                </span>
-                {% endif %}
-              </ul> -->
             </div>  <!-- /container -->
           </div>  <!-- /segment-breadcrumb -->
 
-          <a name="top"> </a>
+          {% if shownav == 'y' %}
+          <div class="justify-content-end d-flex" style="margin-bottom: 32px;">
+            <div style="display: flex; flex-direction: row; gap: 16px;">
+              <div class="text-start d-flex">
+                {% if site.data.pages[page.path].previous %}
+                <a href="{{site.data.pages[page.path].previous}}" class="nav-link-container" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Previous</span>
+                </a>
+              {% else %}
+                <!-- For disabled previous link -->
+                <span class="nav-link-disabled" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px; opacity: 0.6; cursor: default;">
+                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span>Previous</span>
+                </span>
+              {% endif %}
+              </div>
+              <div class="d-flex justify-content-center">
+                <a href="#bottom" class="footer-navigation-link navigation-top-link">Bottom</a>
+              </div>
+              <div class="text-end d-flex">
+                {% if site.data.pages[page.path].next %}
+                <a href="{{site.data.pages[page.path].next}}" class="nav-link-container" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+                  <span>Next</span>
+                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              {% else %}
+                <!-- For disabled next link -->
+                <span class="nav-link-disabled" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px; opacity: 0.6; cursor: default;">
+                  <span>Next</span>
+                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
           <div id="segment-content" class="segment">  <!-- segment-content -->
             <div class="container">  <!-- container -->
               <div class="row">

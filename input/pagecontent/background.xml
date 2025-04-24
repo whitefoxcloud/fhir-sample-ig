@@ -5,5 +5,5 @@
   
   <a name="heading-2"></a>
   <h3>Heading 2</h3>
-  <p><img height="600" src="anImage.png" alt="A sample image"/></p>
+  <p><img class="img-responsive" src="anImage.png" alt="A sample image"/></p>
 </div>

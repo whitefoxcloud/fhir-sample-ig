@@ -659,6 +659,10 @@ h6,
   margin: 1em 0 0.4em 0;
 }
 
+h2 {
+  margin-top: 0px;
+}
+
 /* Common content for section numbering */
 body {
   counter-reset: section;

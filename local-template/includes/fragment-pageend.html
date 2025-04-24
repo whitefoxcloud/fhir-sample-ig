@@ -16,38 +16,42 @@
   <div style="display: flex; flex-direction: row; gap: 16px;">
     <div class="text-start d-flex">
       {% if site.data.pages[page.path].previous %}
-        <a href="{{site.data.pages[page.path].previous}}" class=" footer-navigation-link" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
-          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="footer-navigation-link">Previous</span>
-           </a>
-      {% else %}
-        <span class="footer-navigation-link" style="font-size: 14; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
-          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="footer-navigation-link">Previous</span>
-          </span>
-      {% endif %}
+      <a href="{{site.data.pages[page.path].previous}}" class="nav-link-container" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Previous</span>
+      </a>
+    {% else %}
+      <!-- For disabled previous link -->
+      <span class="nav-link-disabled" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px; opacity: 0.6; cursor: default;">
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 12.5156L6 8.51563L10 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Previous</span>
+      </span>
+    {% endif %}
     </div>
-    <!-- <div class="col-4 text-center">
-      <a href="#top" class="btn btn-outline-secondary btn-sm">Top</a>
-    </div> -->
+    <div class="d-flex justify-content-center">
+      <a href="#top" class="footer-navigation-link navigation-top-link">Top</a>
+    </div>
     <div class="text-end d-flex">
       {% if site.data.pages[page.path].next %}
-        <a href="{{site.data.pages[page.path].next}}" class=" footer-navigation-link" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
-          <span  class="footer-navigation-link">Next</span> 
-          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a>
-      {% else %}
-        <span class="footer-navigation-link" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
-          <span  class="footer-navigation-link">Next</span>
-          <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="#6F7E97" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></span>
-      {% endif %}
+      <a href="{{site.data.pages[page.path].next}}" class="nav-link-container" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px;">
+        <span>Next</span>
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    {% else %}
+      <!-- For disabled next link -->
+      <span class="nav-link-disabled" style="font-size: 14px; font-weight: 500; color: #6F7E97; text-decoration: none; display: flex; align-items: center; gap: 4px; opacity: 0.6; cursor: default;">
+        <span>Next</span>
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 12.5156L10 8.51563L6 4.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    {% endif %}
     </div>
   </div>
 </div>
