@@ -384,6 +384,14 @@ footer button.d-flex:hover {
   color: #428bca;
 }
 
+@media (max-width: 1421px) {
+  .url-truncate {
+    white-space: unset !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+}
+
 .copy-btn {
   background: transparent;
   border: none;
@@ -850,6 +858,114 @@ body.menu-open {
   #sticky-header > div:first-child img:last-child {
     width: 95px;
     height: auto;
+  }
+}
+
+#resource-info-card .card {
+  background-color: #F8F8F8;
+}
+.property-item {
+  padding: 4px 0;
+}
+
+.flex-basis-50 {
+  flex: 0 0 calc(50% - 21px);
+}
+
+.property-label {
+  font-weight: normal;
+  padding-right: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  max-width: 40%;
+}
+
+.property-value {
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vertical-divider {
+  width: 1px;
+  background: #DBE1EA;
+  margin: 0 20px;
+  min-height: 25px;
+  align-self: stretch;
+}
+
+@media (max-width: 760px) {
+  .d-flex.align-items-stretch.p-0.w-100.flex-md-nowrap.flex-wrap {
+      display: block;
+  }
+  
+  .vertical-divider {
+      display: none;
+  }
+
+  .card-body {
+    padding: 0px 16px;
+  }
+
+  .copy-text {
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .property-item {
+      width: 100%;
+      flex-basis: 100%;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(219, 225, 234, 0.5);
+  }
+  
+  .row-item > div > .property-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+  }
+  
+  .property-label {
+      max-width: 50%;
+  }
+  
+  .row-item.border-bottom {
+      border-bottom: none;
+  }
+  
+  .row-item {
+      margin-bottom: 5px;
+      padding: 0;
+  }
+
+  .property-item:empty,
+  .property-item:not(:first-child):has(> :empty),
+  .property-item:not(:first-child) > div:empty {
+      display: none !important;
+  }
+  
+  .row-item:last-child .property-item:last-of-type {
+      border-bottom: none !important;
+      margin-bottom: 0 !important;
+  }
+  
+  .row-item:last-child .property-item:first-child:only-child,
+  .row-item:last-child .property-item:first-child:nth-last-child(2):has(+ .property-item:empty) {
+      border-bottom: none !important;
+  }
+  
+  .row-item:last-child {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+  }
+
+  .row-item:last-child .property-item:nth-last-child(2):not(:has(div.property-label)) {
+    border-bottom: none !important;
+  }
+
+  .property-item > div:not(:has(*)),
+  .property-item:not(:has(div.property-label)) {
+      display: none !important;
   }
 }
 

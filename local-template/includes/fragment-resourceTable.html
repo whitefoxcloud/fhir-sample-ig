@@ -1,202 +1,319 @@
 <div id="resource-info-card" class="container mt-4">
     <div class="card">
         <div class="card-body">
-            {% assign visible_row_count = 0 %}
+            {% assign property_pairs = "" | split: "" %}
             
-            {% comment %}Check if there will be any visible rows{% endcomment %}
-            {% assign has_url = site.data.resources[resource_].url != nil %}
-            {% assign has_standards_status = site.data.resources[resource_].status.standards-status or site.data.resources[resource_].status.status %}
-            {% assign has_fmm = site.data.resources[resource_].status.fmm %}
-            {% assign has_responsible = site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
+            {% if site.data.resources[resource_].url != nil %}
+                {% assign url_data = "" | split: "" %}
+                {% assign url_data = url_data | push: "Official URL" %}
+                {% assign url_data = url_data | push: site.data.resources[resource_].url %}
+                {% assign url_data = url_data | push: "url" %}
+                {% assign property_pairs = property_pairs | push: url_data %}
+            {% endif %}
             
-            {% assign will_have_visible_rows = has_url or has_standards_status or has_fmm or has_responsible %}
+            {% if site.data.resources[resource_].version != nil and site.data.resources[resource_].version != "" %}
+                {% assign version_data = "" | split: "" %}
+                {% assign version_data = version_data | push: "Version" %}
+                {% assign version_data = version_data | push: site.data.resources[resource_].version %}
+                {% assign version_data = version_data | push: "version" %}
+                {% assign property_pairs = property_pairs | push: version_data %}
+            {% endif %}
             
-            {% if will_have_visible_rows %}
-            <!-- <div id="visible-data-rows"> -->
-                {% if site.data.resources[resource_].url != nil %}
-                {% assign visible_row_count = visible_row_count | plus: 1 %}
-                <div class="row row-item border-bottom">
-                    <div class="col-6 p-0">Official URL</div>
-                    <div class="col-6 text-end p-0 d-flex justify-content-end">
-                        <span class="copy-text d-flex">
-                            <a
-                                href="{{site.data.resources[resource_].url}}" 
-                                title="{{site.data.resources[resource_].url}}" 
-                                class="text-decoration-none url-truncate"
-                            >
-                                {{site.data.resources[resource_].url}}
-                            <i class="fas fa-external-link-alt ms-1"></i>
-                            </a>
-                            <button class="copy-btn d-flex justify-content-end" data-clipboard-text="{{site.data.resources[resource_].url}}" onclick="copyToClipboard(this)">
-                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>                        
-                        </span>
-                    </div>
-                </div>
-                
-                {% assign visible_row_count = visible_row_count | plus: 1 %}
-                <div class="row row-item border-bottom">
-                    <div id="1" class="d-flex align-items-stretch p-0">
-                        <div class="col-3 p-0 d-flex align-items-center">Version</div>
-                        <div class="col-3 text-end p-0 d-flex justify-content-end align-items-center">
-                          <span class="copy-text d-flex">
-                            {{site.data.resources[resource_].version}}
-                            <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].version}}" onclick="copyToClipboard(this)">
-                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                            </button>   
-                          </span>
-                        </div>
-                        <!-- Vertical divider -->
-                        <div style="width:1px; background:#DBE1EA; margin: 0 42px; min-height: 25px;"></div>
-
-                        <div id="2" class="d-flex flex-grow-1 align-items-center justify-content-between">
-                          <div class="col-3 p-0">
-                            {% if site.data.resources[resource_].status.standards-status %}
-                              {% if table_prefix != nil %}
-                                {{table_prefix}}
-                              {% endif %}
-                              Standards status:
-                            {% endif %}
-                          </div>
-                          <div class="col-3 text-end p-0">
-                            {% if site.data.resources[resource_].status.standards-status %}
-                              <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
-                                {{site.data.resources[resource_].status.standards-status | capitalize}}
-                              </a>
-                              {% if site.data.resources[resource_].status.normativeVersion %}
-                                (from v{{site.data.resources[resource_].status.normativeVersion}})
-                              {% endif %}
-                            {% else %}
-                              {{site.data.resources[resource_].status.status}}
-                              {% if site.data.resources[resource_].date %}
-                                as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
-                              {% endif %}
-                            {% endif %}
-                          </div>
-                        </div>
-                      </div>
-                </div>
-                {% endif %}
-                
-                {% if site.data.resources[resource_].status.fmm %}
-                {% assign visible_row_count = visible_row_count | plus: 1 %}
-                <div class="row row-item border-bottom">
-                    <div class="col-6 p-0">Maturity Level</div>
-                    <div class="col-6 text-end p-0">
-                        <a href="{{site.data.info.fmm-definition}}" class="text-decoration-none">{{site.data.resources[resource_].status.fmm}}</a>
-                        {% if site.data.resources[resource_].status.fmmSource %}
-                        <span title="{{site.data.resources[resource_].status.fmmSource}}">*</span>
+            {% if site.data.resources[resource_].status.standards-status or site.data.resources[resource_].status.status %}
+                {% assign standards_data = "" | split: "" %}
+                {% assign standards_data = standards_data | push: "Standards status" %}
+                {% if site.data.resources[resource_].status.standards-status %}
+                    {% capture standard_status %}
+                        {{site.data.resources[resource_].status.standards-status | capitalize}}
+                        {% if site.data.resources[resource_].status.normativeVersion %}
+                            (from v{{site.data.resources[resource_].status.normativeVersion}})
                         {% endif %}
-                    </div>
-                </div>
-                {% endif %}
-                
-                {% if site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
-                {% assign visible_row_count = visible_row_count | plus: 1 %}
-                <div class="row row-item border-bottom">
-                    <div class="col-6 p-0">Responsible:</div>
-                    <div class="col-6 text-end p-0">
-                        {% if site.data.resources[resource_].status.link %}
-                        <a href="{{site.data.resources[resource_].status.link}}" class="text-decoration-none">{{site.data.resources[resource_].status.owner}}</a>
-                        {% else %}
-                        {{site.data.resources[resource_].status.owner}}
-                        {% endif %}
-                    </div>
-                </div>
-                {% endif %}
-            <!-- </div> -->
-            {% endif %}
-
-            {% if trimmedJurisdictions != "" %}
-            {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% endif %}
-            {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% if site.data.resources[resource_].identifiers %}
-                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% endif %}
-            {% if site.data.resources[resource_].keywords %}
-                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% endif %}
-            {% if site.data.resources[resource_].contexts %}
-                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% endif %}
-            {% if site.data.resources[resource_].copyright %}
-                {% assign hidden_row_count = hidden_row_count | plus: 1 %}
-            {% endif %}
-            
-            {% assign total_rows = visible_row_count | plus: hidden_row_count %}
-            
-            <!-- <div class="">
-                <div class=""> -->
-                    {% capture newJurisdictions %}
-                    {% for jurisdiction in site.data.resources[resource_].jurisdictions %}
-                    {% assign foundRes = false %}
-                    {% for igjur in site.data.resources[igId].jurisdictions %}
-                    {% if igjur.name == jurisdiction.name %}
-                    {% assign foundRes = true %}
-                    {% break %}
-                    {% endif %}
-                    {% endfor %}
-                    {% if foundRes == false %}
-                    {% if jurisdiction.flag %}
-                    <img alt="{{jurisdiction.name}} flag" src="assets/images/{{jurisdiction.flag}}.svg" height="16" title="{{jurisdiction.name}}"/>
-                    {% elsif jurisdiction.code %}
-                    <span title="{{jurisdiction.name}}">{{jurisdiction.code}}</span>
-                    {% else %}
-                    {{jurisdiction.name}}
-                    {% endif %}
-                    {% endif %}
-                    {% endfor %}
                     {% endcapture %}
-                    {% assign trimmedJurisdictions = newJurisdictions | strip %}
-                    
-                    {% if trimmedJurisdictions != "" %}
-                    <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Realm:</div>
-                        <div class="col-6 text-end p-0">{{trimmedJurisdictions}}</div>
-                    </div>
+                    {% assign standards_data = standards_data | push: standard_status %}
+                {% else %}
+                    {% capture status_info %}
+                        {{site.data.resources[resource_].status.status}}
+                        {% if site.data.resources[resource_].date %}
+                            as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
+                        {% endif %}
+                    {% endcapture %}
+                    {% assign standards_data = standards_data | push: status_info %}
+                {% endif %}
+                {% assign standards_data = standards_data | push: "standards" %}
+                {% assign property_pairs = property_pairs | push: standards_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].status.fmm %}
+                {% assign maturity_data = "" | split: "" %}
+                {% assign maturity_data = maturity_data | push: "Maturity Level" %}
+                {% capture maturity_content %}
+                    {{site.data.resources[resource_].status.fmm}}
+                    {% if site.data.resources[resource_].status.fmmSource %}
+                        *
                     {% endif %}
-                    
+                {% endcapture %}
+                {% assign maturity_data = maturity_data | push: maturity_content %}
+                {% assign maturity_data = maturity_data | push: "maturity" %}
+                {% assign property_pairs = property_pairs | push: maturity_data %}
+            {% endif %}
+            
+            {% if site.data.resources[igId].status.owner != site.data.resources[resource_].status.owner and site.data.resources[resource_].status.owner != nil %}
+                {% assign responsible_data = "" | split: "" %}
+                {% assign responsible_data = responsible_data | push: "Responsible" %}
+                {% assign responsible_data = responsible_data | push: site.data.resources[resource_].status.owner %}
+                {% assign responsible_data = responsible_data | push: "responsible" %}
+                {% assign property_pairs = property_pairs | push: responsible_data %}
+            {% endif %}
+            
+            {% capture newJurisdictions %}
+                {% for jurisdiction in site.data.resources[resource_].jurisdictions %}
+                {% assign foundRes = false %}
+                {% for igjur in site.data.resources[igId].jurisdictions %}
+                {% if igjur.name == jurisdiction.name %}
+                {% assign foundRes = true %}
+                {% break %}
+                {% endif %}
+                {% endfor %}
+                {% if foundRes == false %}
+                {% if jurisdiction.flag %}
+                <img alt="{{jurisdiction.name}} flag" src="assets/images/{{jurisdiction.flag}}.svg" height="16" title="{{jurisdiction.name}}"/>
+                {% elsif jurisdiction.code %}
+                <span title="{{jurisdiction.name}}">{{jurisdiction.code}}</span>
+                {% else %}
+                {{jurisdiction.name}}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            {% endcapture %}
+            {% assign trimmedJurisdictions = newJurisdictions | strip %}
+            
+            {% if trimmedJurisdictions != "" %}
+                {% assign realm_data = "" | split: "" %}
+                {% assign realm_data = realm_data | push: "Realm" %}
+                {% assign realm_data = realm_data | push: trimmedJurisdictions %}
+                {% assign realm_data = realm_data | push: "realm" %}
+                {% assign property_pairs = property_pairs | push: realm_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].name %}
+                {% assign name_data = "" | split: "" %}
+                {% assign name_data = name_data | push: "Computable Name" %}
+                {% assign name_data = name_data | push: site.data.resources[resource_].name %}
+                {% assign name_data = name_data | push: "name" %}
+                {% assign property_pairs = property_pairs | push: name_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].identifiers %}
+                {% assign identifiers_data = "" | split: "" %}
+                {% assign identifiers_data = identifiers_data | push: "Other Identifiers" %}
+                {% assign identifiers_data = identifiers_data | push: site.data.resources[resource_].identifiers %}
+                {% assign identifiers_data = identifiers_data | push: "identifiers" %}
+                {% assign property_pairs = property_pairs | push: identifiers_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].keywords %}
+                {% assign keywords_data = "" | split: "" %}
+                {% assign keywords_data = keywords_data | push: "Keywords" %}
+                {% assign keywords_data = keywords_data | push: site.data.resources[resource_].keywords %}
+                {% assign keywords_data = keywords_data | push: "keywords" %}
+                {% assign property_pairs = property_pairs | push: keywords_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].contexts %}
+                {% assign contexts_data = "" | split: "" %}
+                {% assign contexts_data = contexts_data | push: "Usage" %}
+                {% assign contexts_data = contexts_data | push: site.data.resources[resource_].contexts %}
+                {% assign contexts_data = contexts_data | push: "contexts" %}
+                {% assign property_pairs = property_pairs | push: contexts_data %}
+            {% endif %}
+            
+            {% if site.data.resources[resource_].copyright %}
+                {% assign copyright_data = "" | split: "" %}
+                {% assign copyright_data = copyright_data | push: "Copyright/Legal" %}
+                {% assign copyright_data = copyright_data | push: site.data.resources[resource_].copyright %}
+                {% assign copyright_data = copyright_data | push: "copyright" %}
+                {% assign property_pairs = property_pairs | push: copyright_data %}
+            {% endif %}
+            
+            {% assign total_properties = property_pairs | size %}
+            {% assign rows = total_properties | divided_by: 2 %}
+            {% if total_properties | modulo: 2 != 0 %}
+                {% assign rows = rows | plus: 1 %}
+            {% endif %}
+            
+            {% for row_index in (0..rows) %}
+                {% assign first_index = row_index | times: 2 %}
+                {% if first_index < total_properties %}
+                    {% assign second_index = first_index | plus: 1 %}
                     <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Computable Name</div>
-                        <div class="col-6 text-end p-0">
-                            <span style="font-family: monospace;">{{site.data.resources[resource_].name}}</span>
+                        <div class="d-flex align-items-stretch p-0 w-100 flex-md-nowrap flex-wrap">
+                            <div class="d-flex flex-basis-50 align-items-center property-item">
+                                <div class="d-flex justify-content-between align-items-center w-100">
+                                    <div class="property-label">
+                                        {{ property_pairs[first_index][0] }}
+                                    </div>
+                                    <div class="property-value">
+                                        <span class="copy-text d-flex">
+                                            {% assign property_type = property_pairs[first_index][2] %}
+                                            {% case property_type %}
+                                                {% when "url" %}
+                                                    <a href="{{site.data.resources[resource_].url}}" title="{{site.data.resources[resource_].url}}" class="text-decoration-none url-truncate">
+                                                        {{site.data.resources[resource_].url}}
+                                                        <i class="fas fa-external-link-alt ms-1"></i>
+                                                    </a>
+                                                    <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].url}}" onclick="copyToClipboard(this)">
+                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </button>
+                                                {% when "version" %}
+                                                    {{site.data.resources[resource_].version}}
+                                                    <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].version}}" onclick="copyToClipboard(this)">
+                                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </button>
+                                                {% when "standards" %}
+                                                    {% if site.data.resources[resource_].status.standards-status %}
+                                                        <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
+                                                            {{site.data.resources[resource_].status.standards-status | capitalize}}
+                                                        </a>
+                                                        {% if site.data.resources[resource_].status.normativeVersion %}
+                                                            (from v{{site.data.resources[resource_].status.normativeVersion}})
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {{site.data.resources[resource_].status.status}}
+                                                        {% if site.data.resources[resource_].date %}
+                                                            as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% when "maturity" %}
+                                                    <a href="{{site.data.info.fmm-definition}}" class="text-decoration-none">{{site.data.resources[resource_].status.fmm}}</a>
+                                                    {% if site.data.resources[resource_].status.fmmSource %}
+                                                        <span title="{{site.data.resources[resource_].status.fmmSource}}">*</span>
+                                                    {% endif %}
+                                                {% when "responsible" %}
+                                                    {% if site.data.resources[resource_].status.link %}
+                                                        <a href="{{site.data.resources[resource_].status.link}}" class="text-decoration-none">{{site.data.resources[resource_].status.owner}}</a>
+                                                    {% else %}
+                                                        {{site.data.resources[resource_].status.owner}}
+                                                    {% endif %}
+                                                {% when "realm" %}
+                                                    {{trimmedJurisdictions}}
+                                                {% when "name" %}
+                                                    <span style="font-family: monospace;">{{site.data.resources[resource_].name}}</span>
+                                                {% when "identifiers" %}
+                                                    {{site.data.resources[resource_].identifiers}}
+                                                {% when "keywords" %}
+                                                    {{site.data.resources[resource_].keywords}}
+                                                {% when "contexts" %}
+                                                    <div class="markdown-content">{{site.data.resources[resource_].contexts | markdownify}}</div>
+                                                {% when "copyright" %}
+                                                    <div class="markdown-content">{{site.data.resources[resource_].copyright | markdownify}}</div>
+                                            {% endcase %}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="vertical-divider"></div>
+                            
+                            {% if second_index < total_properties %}
+                                <div class="d-flex flex-basis-50 align-items-center property-item">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <div class="property-label">
+                                            {{ property_pairs[second_index][0] }}
+                                        </div>
+                                        <div class="property-value">
+                                            <span class="copy-text d-flex">
+                                                {% assign property_type = property_pairs[second_index][2] %}
+                                                {% case property_type %}
+                                                    {% when "url" %}
+                                                        <a href="{{site.data.resources[resource_].url}}" title="{{site.data.resources[resource_].url}}" class="text-decoration-none url-truncate">
+                                                            {{site.data.resources[resource_].url}}
+                                                            <i class="fas fa-external-link-alt ms-1"></i>
+                                                        </a>
+                                                        <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].url}}" onclick="copyToClipboard(this)">
+                                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </button>
+                                                    {% when "version" %}
+                                                        {{site.data.resources[resource_].version}}
+                                                        <button class="copy-btn" data-clipboard-text="{{site.data.resources[resource_].version}}" onclick="copyToClipboard(this)">
+                                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M4.66602 4.66602V3.03268C4.66602 2.37929 4.66602 2.05259 4.79317 1.80303C4.90503 1.5835 5.0835 1.40503 5.30303 1.29317C5.55259 1.16602 5.87929 1.16602 6.53268 1.16602H10.966C11.6194 1.16602 11.9461 1.16602 12.1957 1.29317C12.4152 1.40503 12.5937 1.5835 12.7055 1.80303C12.8327 2.05259 12.8327 2.37929 12.8327 3.03268V7.46602C12.8327 8.11941 12.8327 8.44611 12.7055 8.69567C12.5937 8.91519 12.4152 9.09367 12.1957 9.20552C11.9461 9.33268 11.6194 9.33268 10.966 9.33268H9.33268M3.03268 12.8327H7.46602C8.11941 12.8327 8.44611 12.8327 8.69567 12.7055C8.91519 12.5937 9.09367 12.4152 9.20552 12.1957C9.33268 11.9461 9.33268 11.6194 9.33268 10.966V6.53268C9.33268 5.87929 9.33268 5.55259 9.20552 5.30303C9.09367 5.0835 8.91519 4.90503 8.69567 4.79317C8.44611 4.66602 8.11941 4.66602 7.46602 4.66602H3.03268C2.37929 4.66602 2.05259 4.66602 1.80303 4.79317C1.5835 4.90503 1.40503 5.0835 1.29317 5.30303C1.16602 5.55259 1.16602 5.87929 1.16602 6.53268V10.966C1.16602 11.6194 1.16602 11.9461 1.29317 12.1957C1.40503 12.4152 1.5835 12.5937 1.80303 12.7055C2.05259 12.8327 2.37929 12.8327 3.03268 12.8327Z" stroke="#A0AEC7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </button>
+                                                    {% when "standards" %}
+                                                        {% if site.data.resources[resource_].status.standards-status %}
+                                                            <a href="{{site.data.fhir.path}}versions.html#std-process" class="text-decoration-none" title="Standard Status">
+                                                                {{site.data.resources[resource_].status.standards-status | capitalize}}
+                                                            </a>
+                                                            {% if site.data.resources[resource_].status.normativeVersion %}
+                                                                (from v{{site.data.resources[resource_].status.normativeVersion}})
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {{site.data.resources[resource_].status.status}}
+                                                            {% if site.data.resources[resource_].date %}
+                                                                as of {{site.data.resources[resource_].date | date: "%Y-%m-%d"}}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% when "maturity" %}
+                                                        <a href="{{site.data.info.fmm-definition}}" class="text-decoration-none">{{site.data.resources[resource_].status.fmm}}</a>
+                                                        {% if site.data.resources[resource_].status.fmmSource %}
+                                                            <span title="{{site.data.resources[resource_].status.fmmSource}}">*</span>
+                                                        {% endif %}
+                                                    {% when "responsible" %}
+                                                        {% if site.data.resources[resource_].status.link %}
+                                                            <a href="{{site.data.resources[resource_].status.link}}" class="text-decoration-none">{{site.data.resources[resource_].status.owner}}</a>
+                                                        {% else %}
+                                                            {{site.data.resources[resource_].status.owner}}
+                                                        {% endif %}
+                                                    {% when "realm" %}
+                                                        {{trimmedJurisdictions}}
+                                                    {% when "name" %}
+                                                        <span style="font-family: monospace;">{{site.data.resources[resource_].name}}</span>
+                                                    {% when "identifiers" %}
+                                                        {{site.data.resources[resource_].identifiers}}
+                                                    {% when "keywords" %}
+                                                        {{site.data.resources[resource_].keywords}}
+                                                    {% when "contexts" %}
+                                                        <div class="markdown-content">{{site.data.resources[resource_].contexts | markdownify}}</div>
+                                                    {% when "copyright" %}
+                                                        <div class="markdown-content">{{site.data.resources[resource_].copyright | markdownify}}</div>
+                                                {% endcase %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="d-flex flex-basis-50 align-items-center property-item">
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                    
-                    {% if site.data.resources[resource_].identifiers %}
-                    <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Other Identifiers:</div>
-                        <div class="col-6 text-end p-0">{{site.data.resources[resource_].identifiers}}</div>
-                    </div>
-                    {% endif %}
-                    
-                    {% if site.data.resources[resource_].keywords %}
-                    <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Keywords:</div>
-                        <div class="col-6 text-end p-0">{{site.data.resources[resource_].keywords}}</div>
-                    </div>
-                    {% endif %}
-                    
-                    {% if site.data.resources[resource_].contexts %}
-                    <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Usage:</div>
-                        <div class="col-6 p-0 markdown-content">{{site.data.resources[resource_].contexts | markdownify}}</div>
-                    </div>
-                    {% endif %}
-                    
-                    {% if site.data.resources[resource_].copyright %}
-                    <div class="row row-item border-bottom">
-                        <div class="col-6 p-0">Copyright/Legal:</div>
-                        <div class="col-6 p-0 markdown-content">{{site.data.resources[resource_].copyright | markdownify}}</div>
-                    </div>
-                    {% endif %}
-                <!-- </div>
-            </div> -->
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
+<script>
+function copyToClipboard(button) {
+    const textToCopy = button.getAttribute('data-clipboard-text');
+    
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+    
+    textarea.select();
+    document.execCommand('copy');
+    
+    document.body.removeChild(textarea);
+    
+    button.classList.add('copied');
+    setTimeout(() => {
+        button.classList.remove('copied');
+    }, 1500);
+}
+</script>
