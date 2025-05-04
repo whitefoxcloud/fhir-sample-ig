@@ -1,6 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
   const menuToggles = document.querySelectorAll('[data-bs-toggle="collapse"]');
   
+  function syncMenuStates() {
+    menuToggles.forEach(toggle => {
+      const submenuSelector = toggle.getAttribute('href');
+      if (!submenuSelector || !submenuSelector.startsWith('#')) return;
+      
+      const submenuId = submenuSelector.substring(1);
+      const submenu = document.getElementById(submenuId);
+      const chevron = toggle.querySelector('svg');
+      
+      if (!submenu || !chevron) return;
+      
+      const storageKey = `menu-${submenuId}-state`;
+      const isExpanded = localStorage.getItem(storageKey) === 'open';
+      
+      if (isExpanded) {
+        submenu.classList.add('show');
+        chevron.style.transform = 'rotate(90deg)';
+      } else {
+        submenu.classList.remove('show');
+        chevron.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+  
+  syncMenuStates();
+  
+  window.addEventListener('resize', syncMenuStates);
+  
   menuToggles.forEach(toggle => {
     const submenuSelector = toggle.getAttribute('href');
     if (!submenuSelector || !submenuSelector.startsWith('#')) return;
@@ -28,8 +56,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const willBeExpanded = !submenu.classList.contains('show');
       
       chevron.style.transform = willBeExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
-      
       localStorage.setItem(storageKey, willBeExpanded ? 'open' : 'closed');
+      
+      document.querySelectorAll(`[href="#${submenuId}"]`).forEach(otherToggle => {
+        if (otherToggle !== toggle) {
+          const otherChevron = otherToggle.querySelector('svg');
+          if (otherChevron) {
+            otherChevron.style.transform = willBeExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
+          }
+        }
+      });
     });
   });
   
@@ -83,5 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
     applySelectedStyling(filename);
   } else if (savedMenuItem) {
     applySelectedStyling(savedMenuItem);
+  }
+  
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', function() {
+      setTimeout(syncMenuStates, 100);
+    });
   }
 });
