@@ -351,7 +351,6 @@ footer button.d-flex:hover {
   font-size: 14px;
   font-weight: 400;
   color: black;
-  padding: 12px 0;
 }
 
 .row-item.border-bottom {
@@ -893,6 +892,12 @@ body.menu-open {
   margin: 0 20px;
   min-height: 25px;
   align-self: stretch;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.card-body {
+    padding: 0px 16px 0px 16px;
 }
 
 @media (max-width: 760px) {
@@ -902,10 +907,6 @@ body.menu-open {
   
   .vertical-divider {
       display: none;
-  }
-
-  .card-body {
-    padding: 0px 16px;
   }
 
   .copy-text {
