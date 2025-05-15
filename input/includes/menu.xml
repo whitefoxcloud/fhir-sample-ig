@@ -1,79 +1,41 @@
-<nav class="navbar navbar-dark d-flex flex-column justify-content-start align-items-baseline nav-menu-container" style="width: 100%; min-width: 228px; background-color: #121C2D; padding: 24px 16px; font-family: inter; font-weight: 500; font-size: 14px;">
-   <style>
-    .menu-item-selected {
-      background-color: #2A3C5E !important;
-      border-radius: 4px !important;
-    }
-    
-    .collapse {
-      transition: height 0.3s ease;
-    }
-    
-    svg {
-      transition: transform 0.3s ease;
-    }
-  </style>
-  <ul class="nav flex-column w-100">
-      <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }" href="index.html">IG Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }" href="toc.html">Table of Contents</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" data-bs-toggle="collapse" href="#myIgSubmenu" role="button" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease; display: flex; gap: 9px; align-items: center;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">
-        <svg id="myIgChevron" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: transform 0.2s ease;">
-          <path d="M1 9L5 5L1 1" stroke="#A0AEC7" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>MyIg Background</span>
-      </a>
-      <div class="collapse" id="myIgSubmenu">
-        <ul class="nav flex-column ps-3 py-2">
-          <li class="nav-item">
-            <a class="nav-link text-white text-decoration-none" href="background.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">Background</a>
-          </li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" data-bs-toggle="collapse" href="#specSubmenu" role="button" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease; display: flex; gap: 9px; align-items: center;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">
-        <svg id="specChevron" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: transform 0.2s ease;">
-          <path d="M1 9L5 5L1 1" stroke="#A0AEC7" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Specification</span>
-      </a>
-      <div class="collapse" id="specSubmenu">
-        <ul class="nav flex-column ps-3 py-2">
-          <li class="nav-item"><a class="nav-link text-white text-decoration-none" href="spec.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">Detailed Specification</a></li>
-          <li class="nav-item"><a class="nav-link text-white text-decoration-none" href="fragments.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">Instance Fragments</a></li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" href="artifacts.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">Artifact Index</a>
-    </li>
-
-    <li class="nav-item">
-      <a class="nav-link text-white text-decoration-none" data-bs-toggle="collapse" href="#supportSubmenu" role="button" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease; display: flex; gap: 9px; align-items: center;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">
-        <svg id="supportChevron" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: transform 0.2s ease;">
-          <path d="M1 9L5 5L1 1" stroke="#A0AEC7" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>Support</span>
-      </a>
-      <div class="collapse" id="supportSubmenu">
-        <ul class="nav flex-column ps-3 py-2">
-          <li class="nav-item">
-            <a class="nav-link text-white text-decoration-none" target="_blank" href="{{site.data.fhir.path}}index.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">
-              FHIR Spec <img src="external.png" class="ms-1" style="vertical-align: baseline"/>
-            </a>
-          </li>
-          <li class="nav-item"><a class="nav-link text-white text-decoration-none" href="downloads.html" style="font-family: inter; font-weight: 500; font-size: 14px; transition: all 0.2s ease;" onmouseover="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='#2A3C5E'; this.style.borderRadius='4px'; }" onmouseout="if(!this.classList.contains('menu-item-selected')) { this.style.backgroundColor='transparent'; this.style.borderRadius='0'; }">Downloads</a></li>
-        </ul>
-      </div>
-    </li>
-  </ul>
-  <script src="{{site.data.info.assets}}assets/js/sidebar-menu.js"></script>
-</nav>
+<ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li><a href="index.html">IG Home</a></li>
+  <li><a href="toc.html">Table of Contents</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">MyIg Background<b class="caret">
+      </b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="background.html">Background</a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Specification<b class="caret">
+      </b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="spec.html">Detailed Specification</a>
+      </li>
+      <li>
+        <a href="fragments.html">Instance Fragments</a>
+      </li>
+    </ul>
+  </li>
+  <li><a href="artifacts.html">Artifact Index</a></li>
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Support<b class="caret">
+      </b>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        <a target="_blank" href="{{site.data.fhir.path}}index.html">FHIR Spec <img src="external.png" style="text-align: baseline"/></a>
+      </li>
+      <li>
+        <a href="downloads.html">Downloads</a>
+      </li>
+    </ul>
+  </li>
+</ul>      
