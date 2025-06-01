@@ -1,0 +1,12 @@
+menu:
+  home: "IG Home"
+  toc: "Table of Contents"
+  background_dropdown: "MyIG Background"
+  background_link: "Background"
+  specification_dropdown: "Specification"
+  specification_link: "Detailed Specification"
+  fragments_link: "Instance Fragments"
+  artifacts: "Artifact Index"
+  support_dropdown: "Support"
+  fhir_spec_link: "FHIR Spec"
+  downloads_link: "Downloads"
