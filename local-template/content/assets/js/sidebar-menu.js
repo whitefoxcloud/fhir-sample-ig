@@ -1,5 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const SUBMENU_HEIGHT_PADDING = 5;
+  const MOBILE_SUBMENU_MAX_HEIGHT = "1000px";
   const allMenuRoots = document.querySelectorAll("ul.nav.navbar-nav");
+
+  function isMobileViewport() {
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
 
   if (allMenuRoots.length === 0) {
     console.error(
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         stroke-width: 1.33333;
         stroke-linecap: round;
         stroke-linejoin: round;
-        transition: transform 0.2s ease;
+        transition: transform 0.3s ease;
         flex-shrink: 0;
       }
       .nav-menu-container ul.myig-dropdown-menu { 
@@ -171,10 +177,28 @@ document.addEventListener("DOMContentLoaded", function () {
             });
           });
 
-          const submenuId = `myig-submenu-m${menuIndex + 1}-${Math.random()
+          const submenuId = `myig-submenu-m${menuIndex + 1}-i${itemIndex}-${Math.random()
             .toString(36)
             .substring(2, 9)}`;
           submenuUl.id = submenuId;
+
+          if (localStorage.getItem(submenuUl.id + "-state") === "open") {
+            submenuUl.style.display = "block";
+            submenuUl.classList.add("show");
+            
+            if (isMobileViewport()) {
+              submenuUl.style.maxHeight = MOBILE_SUBMENU_MAX_HEIGHT;
+            } else {
+              submenuUl.style.maxHeight = submenuUl.scrollHeight + SUBMENU_HEIGHT_PADDING + "px";
+            }
+            
+            const chevron = toggleLink ? toggleLink.querySelector(".menu-chevron") : null;
+            if (chevron) chevron.style.transform = "rotate(90deg)";
+          } else {
+            submenuUl.style.display = "none";
+            submenuUl.classList.remove("show");
+            submenuUl.style.maxHeight = "0px";
+          }
 
           if (toggleLink) {
             toggleLink.addEventListener("click", function (e) {
@@ -183,20 +207,32 @@ document.addEventListener("DOMContentLoaded", function () {
               const isExpanded = submenuUl.classList.contains("show");
               if (isExpanded) {
                 submenuUl.classList.remove("show");
+                submenuUl.style.maxHeight = "0px";
                 if (chevron) chevron.style.transform = "rotate(0deg)";
                 localStorage.setItem(submenuUl.id + "-state", "closed");
+                submenuUl.addEventListener("transitionend", function onTransitionEnd(event) {
+                  if (event.target === submenuUl && event.propertyName === 'max-height') {
+                    if (!submenuUl.classList.contains("show")) {
+                      submenuUl.style.display = "none";
+                    }
+                    submenuUl.removeEventListener("transitionend", onTransitionEnd);
+                  }
+                });
               } else {
-                submenuUl.classList.add("show");
+                submenuUl.style.display = "block";
+                
+                const actualHeight = submenuUl.scrollHeight + SUBMENU_HEIGHT_PADDING;
+                const targetHeight = actualHeight + "px";
+                
+                void submenuUl.offsetWidth; 
+
+                submenuUl.classList.add("show"); 
+                submenuUl.style.maxHeight = targetHeight;
+
                 if (chevron) chevron.style.transform = "rotate(90deg)";
                 localStorage.setItem(submenuUl.id + "-state", "open");
               }
             });
-
-            if (localStorage.getItem(submenuUl.id + "-state") === "open") {
-              submenuUl.classList.add("show");
-              const chevron = toggleLink.querySelector(".menu-chevron");
-              if (chevron) chevron.style.transform = "rotate(90deg)";
-            }
           }
         }
       }
@@ -219,21 +255,30 @@ document.addEventListener("DOMContentLoaded", function () {
           itemFoundInAnyMenu = true;
 
           let currentElement = link;
-          const parentMenuUl = currentElement.closest(
+          const parentMenuUlForLink = currentElement.closest(
             "ul.nav.flex-column.w-100"
           );
 
           while (
             currentElement &&
-            currentElement !== parentMenuUl &&
-            parentMenuUl
+            currentElement !== parentMenuUlForLink &&
+            parentMenuUlForLink
           ) {
             if (
               currentElement.classList &&
               currentElement.classList.contains("myig-dropdown-menu")
             ) {
               if (!currentElement.classList.contains("show")) {
+                currentElement.style.display = "block";
+                void currentElement.offsetWidth;
                 currentElement.classList.add("show");
+                
+                if (isMobileViewport()) {
+                  currentElement.style.maxHeight = MOBILE_SUBMENU_MAX_HEIGHT;
+                } else {
+                  currentElement.style.maxHeight = currentElement.scrollHeight + SUBMENU_HEIGHT_PADDING + "px";
+                }
+                
                 const toggleForThisSubmenu =
                   currentElement.previousElementSibling;
                 if (
@@ -245,6 +290,15 @@ document.addEventListener("DOMContentLoaded", function () {
                   if (svg) svg.style.transform = "rotate(90deg)";
                   if (currentElement.id)
                     localStorage.setItem(currentElement.id + "-state", "open");
+                }
+              } else {
+                currentElement.style.display = "block";
+                if (!currentElement.style.maxHeight || currentElement.style.maxHeight === "0px") {
+                  if (isMobileViewport()) {
+                    currentElement.style.maxHeight = MOBILE_SUBMENU_MAX_HEIGHT;
+                  } else {
+                    currentElement.style.maxHeight = currentElement.scrollHeight + SUBMENU_HEIGHT_PADDING + "px";
+                  }
                 }
               }
             }
@@ -269,13 +323,13 @@ document.addEventListener("DOMContentLoaded", function () {
     ".nav-menu-container"
   );
 
-  if (allProcessedNavContainers.length > 0) {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        allProcessedNavContainers.forEach((container) => {
-          container.classList.add("nav-initialized");
+    if (allProcessedNavContainers.length > 0) {
+      setTimeout(() => {  
+        requestAnimationFrame(() => {
+          allProcessedNavContainers.forEach((container) => {
+            container.classList.add("nav-initialized");
+          });
         });
-      });
-    });
-  }
+      }, 100);
+    }
 });
