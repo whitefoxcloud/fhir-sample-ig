@@ -1,41 +1,42 @@
+{% assign lang_context = site.data.languages.ig | default: "en" %}
 <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
-  <li><a href="index.html">IG Home</a></li>
-  <li><a href="toc.html">Table of Contents</a></li>
+  <li><a href="index.html">{{ site.data.locales[lang_context].menu.home | default: "IG Home" }}</a></li>
+  <li><a href="toc.html">{{ site.data.locales[lang_context].menu.toc | default: "Table of Contents" }}</a></li>
   <li class="dropdown">
-    <a data-toggle="dropdown" href="#" class="dropdown-toggle">MyIg Background<b class="caret">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">{{ site.data.locales[lang_context].menu.background_dropdown | default: "MyIg Background" }}<b class="caret">
       </b>
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="background.html">Background</a>
+        <a href="background.html">{{ site.data.locales[lang_context].menu.background_link | default: "Background" }}</a>
       </li>
     </ul>
   </li>
   <li class="dropdown">
-    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Specification<b class="caret">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">{{ site.data.locales[lang_context].menu.specification_dropdown | default: "Specification" }}<b class="caret">
       </b>
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a href="spec.html">Detailed Specification</a>
+        <a href="spec.html">{{ site.data.locales[lang_context].menu.specification_link | default: "Detailed Specification" }}</a>
       </li>
       <li>
-        <a href="fragments.html">Instance Fragments</a>
+        <a href="fragments.html">{{ site.data.locales[lang_context].menu.fragments_link | default: "Instance Fragments" }}</a>
       </li>
     </ul>
   </li>
-  <li><a href="artifacts.html">Artifact Index</a></li>
+  <li><a href="artifacts.html">{{ site.data.locales[lang_context].menu.artifacts | default: "Artifact Index" }}</a></li>
   <li class="dropdown">
-    <a data-toggle="dropdown" href="#" class="dropdown-toggle">Support<b class="caret">
+    <a data-toggle="dropdown" href="#" class="dropdown-toggle">{{ site.data.locales[lang_context].menu.support_dropdown | default: "Support" }}<b class="caret">
       </b>
     </a>
     <ul class="dropdown-menu">
       <li>
-        <a target="_blank" href="{{site.data.fhir.path}}index.html">FHIR Spec <img src="external.png" style="text-align: baseline"/></a>
+        <a target="_blank" href="{{site.data.fhir.path}}index.html">{{ site.data.locales[lang_context].menu.fhir_spec_link | default: "FHIR Spec" }} <img src="external.png" style="text-align: baseline"/></a>
       </li>
       <li>
-        <a href="downloads.html">Downloads</a>
+        <a href="downloads.html">{{ site.data.locales[lang_context].menu.downloads_link | default: "Downloads" }}</a>
       </li>
     </ul>
   </li>
-</ul>      
+</ul>

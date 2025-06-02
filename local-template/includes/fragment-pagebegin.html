@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE HTML>
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+{% assign current_lang = site.data.languages.ig | default: "en" %}
+
+{% assign rtl_languages = "ar,he,fa,ur" | split: "," %}
+{% assign is_rtl = false %}
+{% for rtl_lang in rtl_languages %}
+  {% if current_lang == rtl_lang %}
+    {% assign is_rtl = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+
+<html xml:lang="{{ current_lang }}" xmlns="http://www.w3.org/1999/xhtml" lang="{{ current_lang }}"  {% if is_rtl %}dir="rtl"{% endif %}>
   <head>
+    {% if current_lang == "fa" %}
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {% endif %}
+
     <style>
       * {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+
+      {% if is_rtl %}
+      direction: rtl;
+      text-align: right;
+      {% endif %}
+      }
+
+      :lang(fa) {
+        font-family: 'Vazirmatn', 'Vazir', 'Tahoma', 'Arial Unicode MS', sans-serif !important;
       }
 
       .anchorjs-link {

@@ -1,0 +1,12 @@
+menu:
+  home: "Accueil IG"
+  toc: "Table des Matières"
+  background_dropdown: "Contexte MyIG"
+  background_link: "Contexte"
+  specification_dropdown: "Spécification"
+  specification_link: "Spécification Détaillée"
+  fragments_link: "Fragments d'Instance"
+  artifacts: "Index des Artefacts"
+  support_dropdown: "Support"
+  fhir_spec_link: "Spécification FHIR"
+  downloads_link: "Téléchargements"

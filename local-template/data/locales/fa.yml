@@ -1,0 +1,18 @@
+menu:
+  home: "صفحه‌ی اصلی راهنما"
+  toc: "فهرست مطالب"
+  background_dropdown: "‌پیشینه‌ی MyIG"
+  background_link: "پیشینه"
+  specification_dropdown: "مشخصات"
+  specification_link: "مشخصات تفصیلی"
+  fragments_link: "قطعات نمونه"
+  artifacts: "فهرست محصولات"
+  support_dropdown: "پشتیبانی"
+  fhir_spec_link: "مشخصات FHIR"
+  downloads_link: "دانلودها"
+buttons:
+  search: "جستجو"
+  previous: "قبلی"
+  next: "بعدی"
+  top: "بالا"
+language_name: "فارسی"

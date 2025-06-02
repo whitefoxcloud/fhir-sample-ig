@@ -2,6 +2,11 @@
 <!-- Start by finding all references to "myig" and updating to appropriate text for your IG, including changing realm -->
 <ImplementationGuide xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir ../input-cache/schemas/R4/fhir-single.xsd">
   <id value="example.fhir.uv.myig"/>
+
+  <!-- Accessible during Jekyll’s build process as: site.data.languages.ig -->
+  <!-- Use this to change the language of the IG template -->
+  <language value="en"/> 
+
   <extension url="http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status">
     <valueCode value="informative"/> 
   </extension> 
@@ -245,6 +250,7 @@
       <value value="true"/>
     </parameter>
     <parameter>
+      <!-- Accessible during Jekyll’s build process as: site.data.languages.defLang -->
       <code value="i18n-default-lang"/>
       <value value="en"/>
     </parameter>
