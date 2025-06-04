@@ -993,3 +993,13 @@ body.menu-open {
     height: auto;
   }
 }
+
+@media (max-width: 359px) {
+  #segment-breadcrumb .container {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .sticky-toc {
+    display: none !important;
+  }
+}
